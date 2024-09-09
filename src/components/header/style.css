@@ -1,0 +1,27 @@
+.header {
+  padding: 0 2rem;
+  background-color: var(--dark1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & h1 {
+    color: var(--light);
+    font-weight: 500;
+  }
+
+  & button {
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--dark3);
+    font-size: 1rem;
+    color: var(--light);
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+    
+  & button:hover {
+    border: 1px solid var(--light);
+  }
+}

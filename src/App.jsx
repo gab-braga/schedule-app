@@ -1,8 +1,13 @@
+import './App.css';
+import Header from './components/header';
+import Home from './pages/home';
+
 function App() {
   return (
-    <>
-      <h1>app</h1>
-    </>
+    <div className="root">
+      <Header />
+      <Home />
+    </div>
   );
 }
 

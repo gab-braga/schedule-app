@@ -1,0 +1,39 @@
+.card {
+  flex-grow: 1;
+  min-height: 14rem;
+  flex-basis: 14rem;
+  padding: 1.5rem;
+  background-color: var(--dark3);
+  border-radius: 1rem;
+
+  & h3 {
+    margin: 0;
+    color: var(--light);
+    font-weight: 500;
+  }
+  
+  & p {
+    color: var(--light);
+    font-weight: 300;
+  }
+
+  & .control {
+    display: flex;
+    gap: 0.8rem;
+    
+    & button {
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      background-color: var(--dark1);
+      color: var(--light);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    
+    & button:hover {
+      border: 1px solid var(--light);
+    }
+  }
+}
