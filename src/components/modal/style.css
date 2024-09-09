@@ -1,0 +1,64 @@
+.bg-modal {
+  position: absolute;
+  background-color: #000000aa;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal {
+    width: clamp(200px, 90%, 400px);
+    background-color: var(--dark2);
+    border-radius: 1rem;
+    padding: 2rem;
+    color: var(--light);
+
+    & h2 {
+      margin: 0;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    & form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+
+      & input {
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--dark3);
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: inherit;
+      }
+
+      & input:focus {
+        outline: none;
+      }
+    }
+
+    & .control {
+      padding-top: 0.5rem;
+      display: flex;
+      gap: 0.8rem;
+    }
+    
+    & button {
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      background-color: var(--dark1);
+      color: var(--light);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    
+    & button:hover {
+      border: 1px solid var(--light);
+    }
+  }
+}
