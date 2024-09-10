@@ -19,6 +19,7 @@
     color: var(--light);
     cursor: pointer;
     border: 1px solid transparent;
+    text-wrap: nowrap;
   }
     
   & button:hover {

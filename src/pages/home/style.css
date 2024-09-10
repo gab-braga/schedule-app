@@ -2,8 +2,15 @@
   flex: 1;
   padding: 2rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: start;
   justify-content: start;
+  align-content: start;
   gap: 2rem;
-  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+  }
 }

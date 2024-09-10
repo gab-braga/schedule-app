@@ -63,3 +63,11 @@
     text-decoration: line-through;
   }
 }
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    max-width: none;
+    flex-basis: content;
+  }
+}
