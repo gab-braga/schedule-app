@@ -1,17 +1,31 @@
+import { useEffect, useState } from 'react';
+import { closeById, deleteById } from '../../firebase/firestore';
 import './style.css';
 
-export default () => {
+export default ({ id, content, time, done, update }) => {
+  function formatDate(date) {
+    return new Date(date).toLocaleString('pt-br');
+  }
+
+  async function remove() {
+    await deleteById('tasks', id);
+    update();
+  }
+
+  async function close() {
+    await closeById('tasks', id, { content, time, done: true });
+    update();
+  }
+
   return (
-    <div className="card">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-        atque facere labore quod. Temporibus, delectus numquam repellat enim sit
-        voluptates quidem, ex officia eos eligendi ullam beatae mollitia ipsa!
-        Nam?
-      </p>
+    <div className={done ? 'card done' : 'card'}>
+      <small>{formatDate(time)}</small>
+      <div className="content">
+        <p>{content}</p>
+      </div>
       <div className="control">
-        <button>Concluir</button>
-        <button>Remover</button>
+        {!done && <button onClick={close}>Concluir</button>}
+        <button onClick={remove}>Remover</button>
       </div>
     </div>
   );

@@ -1,17 +1,12 @@
 import Card from '../../components/card';
 import './style.css';
 
-export default () => {
+export default ({ tasks, update }) => {
   return (
     <div className="home">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {tasks.map((task, idx) => (
+        <Card {...task} key={idx} update={update} />
+      ))}
     </div>
   );
 };

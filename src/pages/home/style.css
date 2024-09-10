@@ -2,6 +2,8 @@
   flex: 1;
   padding: 2rem;
   display: flex;
+  align-items: start;
+  justify-content: start;
   gap: 2rem;
   flex-wrap: wrap;
 }

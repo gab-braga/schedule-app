@@ -1,17 +1,38 @@
+import { useForm } from 'react-hook-form';
 import './style.css';
+import { create } from '../../firebase/firestore.js';
+import { useState } from 'react';
 
-export default (setShow) => {
+export default ({ close, update }) => {
+  const { handleSubmit, register } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  function send({ content }) {
+    setLoading(true);
+    const now = Date.now();
+    const taskData = {
+      content,
+      time: now,
+      date: new Date(now),
+      done: false,
+    };
+    create('tasks', taskData).then(() => {
+      setLoading(false);
+      update();
+      close();
+    });
+  }
+
   return (
     <div className="bg-modal">
       <div className="modal">
         <h2>Nova Tarefa</h2>
-
-        <form>
+        <form onSubmit={handleSubmit(send)}>
           <label htmlFor="content">Tarefa:</label>
-          <input type="text" />
+          <input type="text" {...register('content', { required: true })} />
           <div className="control">
-            <button>Adicionar</button>
-            <button type="button" onClick={() => setShow(falses)}>
+            <button>{loading ? 'Carregando...' : 'Adicionar'}</button>
+            <button type="button" onClick={() => close()}>
               Fechar
             </button>
           </div>
