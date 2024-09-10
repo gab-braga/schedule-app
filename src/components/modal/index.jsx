@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
 import './style.css';
 import { create } from '../../firebase/firestore.js';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();

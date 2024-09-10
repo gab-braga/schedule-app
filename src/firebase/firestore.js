@@ -43,9 +43,9 @@ async function deleteById(local, id) {
   const docSnap = await deleteDoc(docRef);
 }
 
-async function closeById(local, id, data) {
+async function updateById(local, id, data) {
   const docRef = doc(db, local, id);
   const docSnap = await updateDoc(docRef, data);
 }
 
-export { create, findAll, deleteById, closeById };
+export { create, findAll, deleteById, updateById };

@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import { closeById, deleteById } from '../../firebase/firestore';
 import './style.css';
+import { updateById, deleteById } from '../../firebase/firestore';
 
 export default ({ id, content, time, done, update }) => {
   function formatDate(date) {
@@ -13,7 +12,7 @@ export default ({ id, content, time, done, update }) => {
   }
 
   async function close() {
-    await closeById('tasks', id, { content, time, done: true });
+    await updateById('tasks', id, { content, time, done: true });
     update();
   }
 

@@ -1,5 +1,5 @@
-import Card from '../../components/card';
 import './style.css';
+import Card from '../../components/card';
 
 export default ({ tasks, update }) => {
   return (
