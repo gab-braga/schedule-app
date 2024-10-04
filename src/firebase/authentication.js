@@ -3,7 +3,10 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut as signOutFirebase,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 
 const auth = getAuth(app);
@@ -25,10 +28,22 @@ async function signIn(email, password) {
     password,
   );
   const { user } = userCredencial;
+  return user;
+}
+
+async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  const credencial = signInWithPopup(auth, provider);
+  const { user } = credencial;
+  return user;
+}
+
+async function signOut() {
+  await signOutFirebase(auth);
 }
 
 function getAuthUser(callUser) {
   onAuthStateChanged(auth, callUser);
 }
 
-export { signUp, signIn, getAuthUser };
+export { signUp, signIn, signInWithGoogle, signOut, getAuthUser };

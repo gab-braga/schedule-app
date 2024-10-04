@@ -1,19 +1,19 @@
 import './style.css';
-import { signIn, signUp } from '../../firebase/authentication';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../../context/auth';
 
 export default () => {
   const { handleSubmit, register } = useForm();
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
+  const { registerUser, loginWithGoogle } = useAuth();
 
-  async function onSubmit({ email, password }) {
+  async function handleSignIn({ email, password }) {
     setMessage('Carregando...');
     try {
-      await signUp(email, password);
-      await signIn(email, password);
+      await registerUser(email, password);
       navigate('/');
     } catch (error) {
       console.error(error);
@@ -21,9 +21,20 @@ export default () => {
     }
   }
 
+  async function handleSignInGoogle() {
+    setMessage('Carregando...');
+    try {
+      await loginWithGoogle();
+      navigate('/');
+    } catch(error) {
+      console.error(error);
+      setMessage('Erro. Tente novamente.')
+    }
+  }
+
   return (
     <div className="login">
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <form onSubmit={handleSubmit(handleSignIn)} className="form">
         <h2>{message ? message : 'Cadastre-se'}</h2>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
@@ -37,7 +48,7 @@ export default () => {
           />
         </div>
         <button type="submit">Cadastrar</button>
-        <button type="button">Cadastrar com Google</button>
+        <button type="button" onClick={handleSignInGoogle}>Entrar com Google</button>
         <Link to="/signin" className='link'>Login</Link>
       </form>
     </div>
