@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
 import './style.css';
-import { signIn, signUp } from '../../firebase/authentication';
-import { useNavigate } from 'react-router-dom';
+import { signIn } from '../../firebase/authentication';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default () => {
@@ -30,13 +30,11 @@ export default () => {
         </div>
         <div className="form-group">
           <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            {...register('password', { required: true })}
-          />
+          <input type="password" {...register('password', { required: true })} />
         </div>
         <button type="submit">Entrar</button>
         <button type="button">Entrar com Google</button>
+        <Link to="/signup" className='link'>Cadastre-se</Link>
       </form>
     </div>
   );

@@ -16,11 +16,21 @@ body {
   background-color: var(--dark2);
 }
 
-h1, h2, h3, p, label {
+h1,
+h2,
+h3,
+p,
+label {
   color: var(--light);
 }
 
-body, div, header, main, section, article, footer {
+body,
+div,
+header,
+main,
+section,
+article,
+footer {
   margin: 0;
   padding: 0;
 }
@@ -49,4 +59,10 @@ button:hover,
 input:focus {
   border: 1px solid var(--light);
   outline: none;
+}
+
+.link {
+  display: inline-block;
+  margin: 0 auto;
+  color: cornflowerblue;
 }

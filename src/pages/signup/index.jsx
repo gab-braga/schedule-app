@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
 import './style.css';
 import { signIn, signUp } from '../../firebase/authentication';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default () => {
@@ -38,6 +38,7 @@ export default () => {
         </div>
         <button type="submit">Cadastrar</button>
         <button type="button">Cadastrar com Google</button>
+        <Link to="/signin" className='link'>Login</Link>
       </form>
     </div>
   );
