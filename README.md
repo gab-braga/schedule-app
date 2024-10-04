@@ -13,7 +13,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida ut
 * Firebase Hosting
 
 ## Visualização
-![Homepage](https://github.com/user-attachments/assets/c4e49d17-9eb7-4934-b03e-2d6d7c7be8b4)
+![homepage](https://github.com/user-attachments/assets/03aaf8c0-5498-4fa4-8cf6-b3174787266e)
 
 ## Instalação e Configuração
 1. Clone o repositório
