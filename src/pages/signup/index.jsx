@@ -47,8 +47,8 @@ export default () => {
             {...register('password', { required: true })}
           />
         </div>
-        <button type="submit">Cadastrar</button>
-        <button type="button" onClick={handleSignInGoogle}>Entrar com Google</button>
+        <button type="submit" className="btn">Cadastrar</button>
+        <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
         <Link to="/signin" className='link'>Login</Link>
       </form>
     </div>

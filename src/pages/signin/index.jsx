@@ -44,8 +44,8 @@ export default () => {
           <label htmlFor="password">Senha</label>
           <input type="password" {...register('password', { required: true })} />
         </div>
-        <button type="submit">Entrar</button>
-        <button type="button" onClick={handleSignInGoogle}>Entrar com Google</button>
+        <button type="submit" className="btn">Entrar</button>
+        <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
         <Link to="/signup" className='link'>Cadastre-se</Link>
       </form>
     </div>

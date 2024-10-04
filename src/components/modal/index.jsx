@@ -31,8 +31,8 @@ export default ({ close, update }) => {
           <label htmlFor="content">Tarefa:</label>
           <input type="text" {...register('content', { required: true })} />
           <div className="control">
-            <button>{loading ? 'Carregando...' : 'Adicionar'}</button>
-            <button type="button" onClick={() => close()}>
+            <button type='submit' className='btn'>{loading ? 'Carregando...' : 'Adicionar'}</button>
+            <button type="button" className='btn' onClick={() => close()}>
               Fechar
             </button>
           </div>

@@ -4,10 +4,13 @@ import { findAll } from '../../firebase/firestore';
 import Modal from '../../components/modal';
 import Header from '../../components/header';
 import Card from '../../components/card';
+import { useAuth } from '../../context/auth';
+import { Navigate } from 'react-router-dom';
 
 export default () => {
   const [modal, setModal] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const { isAuthenticated } = useAuth();
 
   async function loadTasks() {
     const data = await findAll('tasks', 'date');
@@ -29,6 +32,8 @@ export default () => {
   useEffect(() => {
     loadTasks();
   }, []);
+
+  if (!isAuthenticated) return <Navigate to="/signin" />
 
   return (
     <div className="home">

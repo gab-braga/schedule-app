@@ -23,8 +23,8 @@ export default ({ id, content, time, done, update }) => {
         <p>{content}</p>
       </div>
       <div className="control">
-        {!done && <button onClick={close}>Concluir</button>}
-        <button onClick={remove}>Remover</button>
+        {!done && <button onClick={close} className='btn sm'>Concluir</button>}
+        <button onClick={remove} className='btn sm'>Remover</button>
       </div>
     </div>
   );
