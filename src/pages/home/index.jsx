@@ -1,9 +1,9 @@
 import './style.css';
-import Card from '../../components/card';
 import { useEffect, useState } from 'react';
 import { findAll } from '../../firebase/firestore';
 import Modal from '../../components/modal';
 import Header from '../../components/header';
+import Card from '../../components/card';
 
 export default () => {
   const [modal, setModal] = useState(false);
