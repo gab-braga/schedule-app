@@ -4,20 +4,24 @@ import { getAuthUser, signIn, signInWithGoogle, signOut, signUp } from '../fireb
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [isAuthenticated, setAuthenticated] = useState(null);
 
   async function registerUser(email, password) {
     await signUp(email, password);
     await signIn(email, password);
+    setAuthenticated(true);
   }
 
   async function login(email, password) {
     await signIn(email, password);
+    setAuthenticated(true);
   }
 
   async function loginWithGoogle(email, password) {
     await signInWithGoogle();
+    setAuthenticated(true);
   }
 
   async function logout() {
@@ -33,8 +37,11 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         setAuthenticated(false);
       }
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <p>Carregando...</p>;
 
   return (
     <AuthContext.Provider

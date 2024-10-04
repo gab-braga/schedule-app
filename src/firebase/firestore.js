@@ -5,6 +5,7 @@ import {
   doc,
   getDocs,
   getFirestore,
+  where,
   orderBy,
   query,
   updateDoc,
@@ -22,10 +23,14 @@ async function create(local, data) {
   }
 }
 
-async function findAll(local, order) {
+async function findAll(userId, local, order) {
   const docs = [];
   const querySnapshot = await getDocs(
-    query(collection(db, local), orderBy(order, 'desc')),
+    query(
+      collection(db, local),
+      where("userId", "==", userId),
+      orderBy(order, 'desc')
+    ),
   );
   querySnapshot.forEach((doc) => {
     const data = {

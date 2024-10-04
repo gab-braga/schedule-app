@@ -2,25 +2,28 @@ import './style.css';
 import { create } from '../../firebase/firestore.js';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../context/auth.jsx';
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
-  function send({ content }) {
+  async function send({ content }) {
     setLoading(true);
     const now = Date.now();
+    const { uid } = user;
     const taskData = {
+      userId: uid,
       content,
       time: now,
       date: new Date(now),
-      done: false,
+      done: false
     };
-    create('tasks', taskData).then(() => {
-      setLoading(false);
-      update();
-      close();
-    });
+    await create('tasks', taskData);
+    setLoading(false);
+    update();
+    close();
   }
 
   return (

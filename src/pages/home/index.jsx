@@ -10,10 +10,10 @@ import { Navigate } from 'react-router-dom';
 export default () => {
   const [modal, setModal] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   async function loadTasks() {
-    const data = await findAll('tasks', 'date');
+    const data = await findAll(user.uid, 'tasks', 'date');
     setTasks(data);
   }
 
@@ -30,10 +30,10 @@ export default () => {
   }
 
   useEffect(() => {
-    loadTasks();
-  }, []);
+    if (user) loadTasks();
+  }, [user]);
 
-  if (!isAuthenticated) return <Navigate to="/signin" />
+  if (!isAuthenticated) return <Navigate to="/signin" />;
 
   return (
     <div className="home">
