@@ -2,6 +2,7 @@
 Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida utilizando React para a interface do usuário e Firebase para o backend.
 
 ## Funcionalidades
+* Autenticação com Firebase Authentication
 * Adicionar, editar e remover tarefas
 * Marcar tarefas como concluídas
 * Armazenamento com Firebase Firestore
@@ -10,6 +11,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida ut
 ## Tecnologias Utilizadas
 * React
 * Firebase Firestore
+* Firebase Authentication
 * Firebase Hosting
 
 ## Visualização
