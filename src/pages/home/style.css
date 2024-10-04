@@ -1,4 +1,11 @@
 .home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home .tasks {
   flex: 1;
   padding: 2rem;
   display: flex;
@@ -10,7 +17,7 @@
 }
 
 @media (max-width: 768px) {
-  .home {
+  .home .tasks {
     flex-direction: column;
   }
 }
