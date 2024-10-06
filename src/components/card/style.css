@@ -1,8 +1,6 @@
 .card {
-  flex-grow: 1;
-  flex-basis: 18rem;
+  flex: 1 1 260px;
   max-width: 25rem;
-  min-width: 15rem;
   height: 18rem;
   padding: 1.5rem;
   background-color: var(--dark3);
@@ -57,8 +55,8 @@
 
 @media (max-width: 768px) {
   .card {
-    width: 100%;
-    max-width: none;
-    flex-basis: content;
+    flex: 1;
+    height: initial;
+    max-width: initial;
   }
 }
