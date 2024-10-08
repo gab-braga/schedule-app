@@ -1,7 +1,8 @@
+import Header from "../../components/header";
 import "./style.css";
 
 export default () => {
     return (
-        <h1>Agenda</h1>
+        <Header />
     );
 }

@@ -10,6 +10,7 @@
   --dark1: #1C1D22;
   --dark2: #222327;
   --dark3: #292a2e;
+  --text-gray: #6D6E73;
 }
 
 body {
@@ -68,6 +69,9 @@ input:focus {
 
 .link {
   display: inline-block;
-  margin: 0 auto;
   color: cornflowerblue;
+}
+
+.center {
+  margin: 0 auto;
 }

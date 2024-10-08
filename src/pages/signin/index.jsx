@@ -46,7 +46,7 @@ export default () => {
         </div>
         <button type="submit" className="btn">Entrar</button>
         <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
-        <Link to="/signup" className='link'>Cadastre-se</Link>
+        <Link to="/signup" className="link center">Cadastre-se</Link>
       </form>
     </div>
   );

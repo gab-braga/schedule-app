@@ -1,19 +1,27 @@
+import "./style.css";
 import { useAuth } from '../../context/auth';
-import './style.css';
+import { NavLink } from "react-router-dom";
 
 export default ({ action }) => {
   const { logout } = useAuth();
+  
+  const getMenuOptionClass = data => data.isActive ? "menu-option active" : "menu-option";
 
   return (
     <header className="header">
-      <h1>Lista de Tarefas</h1>
       <div className="menu">
-      <button onClick={() => action(true)} className='btn sm'>
-        Novo &#43;
-      </button>
-      <button onClick={logout} className='btn sm'>
-        Sair &#8702;
-      </button>
+        <nav className="links">
+          <NavLink to="/" className={getMenuOptionClass}>Tarefas</NavLink>
+          <NavLink to="/schedule" className={getMenuOptionClass}>Agenda</NavLink>
+        </nav>
+        <div className="control">
+          <button onClick={() => action(true)} className="btn sm">
+            Novo &#43;
+          </button>
+          <button onClick={logout} className="btn sm">
+            Sair &#8702;
+          </button>
+        </div>
       </div>
     </header>
   );
