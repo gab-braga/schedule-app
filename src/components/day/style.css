@@ -1,6 +1,6 @@
 .day {
-    min-height: 400px;
     min-width: 160px;
+    min-height: 400px;
     flex: 1;
     display: flex;
     flex-wrap: wrap;
@@ -8,25 +8,34 @@
     background: var(--dark3);
     border-radius: 1rem;
     overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.day.today {
+    border: 2px solid var(--light3);
 }
 
 .day .title {
     display: inline-block;
     padding: 0.5rem 1rem;
     text-align: center;
-    font-weight: 500;
     color: var(--text-gray);
+    font-weight: 500;
     border-bottom: 2px solid var(--dark2);
-    margin-bottom: 0.5rem;
+}
+
+.day.today .title {
+    color: var(--light1);
 }
 
 .day .items {
     flex: 1;
+    padding: 1.5rem 0;
 }
 
 .day .items .task {
     padding: 0.5rem 1rem;
-    color: var(--light);
+    color: var(--light1);
 }
 
 .day .items .task .hours {
@@ -40,17 +49,8 @@
     line-height: 1.3rem;
 }
 
-.day .btn-new {
-    margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    color: var(--text-gray);
-    border: none;
-    border-top: 2px solid var(--dark2);
-    background: none;
-    cursor: pointer;
-}
-
-.day .btn-new:hover {
-    color: var(--light);
+@media (max-width: 480px) {
+    .day {
+        min-width: 260px;
+    }
 }

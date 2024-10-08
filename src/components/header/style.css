@@ -24,7 +24,7 @@
 }
 
 .header .menu .links .menu-option.active {
-  color: var(--light);
+  color: var(--light1);
 }
 
 .header .menu .links .menu-option:hover {

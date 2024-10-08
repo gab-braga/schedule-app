@@ -16,7 +16,7 @@
   justify-content: start;
   align-items: stretch;
   align-content: start;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 @media (max-width: 768px) {
