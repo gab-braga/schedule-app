@@ -21,6 +21,7 @@ export default ({ day }) => {
 
     return (
         <div className={isToday ? "day today" : "day"}>
+            <span className="flag"></span>
             <span className="title">
                 {formatDayOfWeek(day)}
             </span>

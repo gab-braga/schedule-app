@@ -2,6 +2,9 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import Header from "../../components/header";
 import Day from "../../components/day";
+import { useAuth } from "../../context/auth";
+import { Navigate } from "react-router-dom";
+import Modal from "../../components/modal";
 
 function getCurrentWeekDays() {
     const today = new Date(Date.now());
@@ -22,16 +25,28 @@ function getCurrentWeekDays() {
 }
 
 export default () => {
-
+    const { isAuthenticated } = useAuth();
+    const [modal, setModal] = useState(false);
     const [week, setWeek] = useState([]);
+
+    function openModal() {
+      setModal(true);
+    }
+  
+    function closeModal() {
+      setModal(false);
+    }
 
     useEffect(() => {
         setWeek(getCurrentWeekDays());
-    }, [])
+    }, []);
+
+    if (!isAuthenticated) return <Navigate to="/signin" />;
 
     return (
         <div className="schedule">
-            <Header />
+            {modal && <Modal close={closeModal} />}
+            <Header action={openModal} />
             <div className="panel">
                 <div className="container control">
                     <button className="btn sm">Anterior</button>

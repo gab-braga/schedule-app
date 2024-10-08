@@ -9,10 +9,22 @@
     border-radius: 1rem;
     overflow: hidden;
     border: 2px solid transparent;
+    position: relative;
 }
 
-.day.today {
-    border: 2px solid var(--light3);
+.day .flag {
+    display: none;
+}
+
+.day.today .flag {
+    display: inline-block;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    background: var(--blue-flag);
+    border-radius: 1rem;
 }
 
 .day .title {

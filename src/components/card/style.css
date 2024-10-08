@@ -3,7 +3,7 @@
   max-width: 25rem;
   min-height: 14rem;
   padding: 1.5rem;
-  background-color: var(--dark3);
+  background: var(--dark3);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,6 @@
   border-radius: 20px;
 }
 
-
 .card.done p,
 .card.done small {
   text-decoration: line-through;
@@ -58,7 +57,7 @@
 @media (max-width: 768px) {
   .card {
     flex: 1;
-    height: initial;
+    min-height: initial;
     max-width: initial;
   }
 }
