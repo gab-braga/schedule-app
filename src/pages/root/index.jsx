@@ -4,8 +4,10 @@ import "./style.css";
 
 export default () => {
     return (
-        <AuthProvider>
-            <Outlet />
-        </AuthProvider>
+        <div className="root">
+            <AuthProvider>
+                <Outlet />
+            </AuthProvider>
+        </div>
     );
 }

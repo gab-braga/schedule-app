@@ -1,0 +1,56 @@
+.day {
+    min-height: 400px;
+    min-width: 160px;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background: var(--dark3);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.day .title {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-gray);
+    border-bottom: 2px solid var(--dark2);
+    margin-bottom: 0.5rem;
+}
+
+.day .items {
+    flex: 1;
+}
+
+.day .items .task {
+    padding: 0.5rem 1rem;
+    color: var(--light);
+}
+
+.day .items .task .hours {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+.day .items .task .description {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.3rem;
+}
+
+.day .btn-new {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: var(--text-gray);
+    border: none;
+    border-top: 2px solid var(--dark2);
+    background: none;
+    cursor: pointer;
+}
+
+.day .btn-new:hover {
+    color: var(--light);
+}

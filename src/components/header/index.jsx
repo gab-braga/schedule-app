@@ -9,7 +9,7 @@ export default ({ action }) => {
 
   return (
     <header className="header">
-      <div className="menu">
+      <div className="container menu">
         <nav className="links">
           <NavLink to="/" className={getMenuOptionClass}>Tarefas</NavLink>
           <NavLink to="/schedule" className={getMenuOptionClass}>Agenda</NavLink>

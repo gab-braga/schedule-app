@@ -8,49 +8,50 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
-  & small {
-    color: gray;
-  }
-
-  & .content {
-    flex: 1;
-    overflow-y: auto;
-
-    & p {
-      font-weight: 300;
-    }
-  }
-
-  & .control {
-    display: flex;
-    gap: 0.8rem;
-
-    & .btn {
-      background-color: var(--dark1);
-    }
-  }
-
-  & .content::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  & .content::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  & .content::-webkit-scrollbar-thumb {
-    background-color: var(--dark2);
-    border-radius: 20px;
-  }
 }
 
-.card.done {
+.card small {
+  color: var(--text-gray);
+  font-size: 0.8rem;
+}
 
-  & p,
-  & small {
-    text-decoration: line-through;
-  }
+.card .content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.card .content p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.card .control {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.card .control .btn {
+  background-color: var(--dark1);
+}
+
+
+.card .content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.card .content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card .content::-webkit-scrollbar-thumb {
+  background-color: var(--dark2);
+  border-radius: 20px;
+}
+
+
+.card.done p,
+.card.done small {
+  text-decoration: line-through;
 }
 
 @media (max-width: 768px) {

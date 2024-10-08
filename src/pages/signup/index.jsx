@@ -10,45 +10,45 @@ export default () => {
   const [message, setMessage] = useState(null);
   const { registerUser, loginWithGoogle } = useAuth();
 
-  async function handleSignIn({ email, password }) {
-    setMessage('Carregando...');
+  async function handleSignUp({ email, password }) {
+    setMessage("Carregando...");
     try {
       await registerUser(email, password);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error(error);
-      setMessage('Erro. Tente novamente.');
+      setMessage("Erro. Tente novamente.");
     }
   }
 
   async function handleSignInGoogle() {
-    setMessage('Carregando...');
+    setMessage("Carregando...");
     try {
       await loginWithGoogle();
-      navigate('/');
-    } catch(error) {
+      navigate("/");
+    } catch (error) {
       console.error(error);
-      setMessage('Erro. Tente novamente.')
+      setMessage("Erro. Tente novamente.")
     }
   }
 
   return (
-    <div className="login">
-      <form onSubmit={handleSubmit(handleSignIn)} className="form">
-        <h2>{message ? message : 'Cadastre-se'}</h2>
+    <div className="signup">
+      <form onSubmit={handleSubmit(handleSignUp)} className="form">
+        <h2>{message ? message : "Cadastre-se"}</h2>
+        <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
-          <input type="email" {...register('email', { required: true })} />
+          <input type="email" {...register("email", { required: true })} />
         </div>
         <div className="form-group">
           <label htmlFor="password">Senha</label>
           <input
             type="password"
-            {...register('password', { required: true })}
+            {...register("password", { required: true })}
           />
         </div>
         <button type="submit" className="btn">Cadastrar</button>
-        <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
         <Link to="/signin" className="link center">Login</Link>
       </form>
     </div>

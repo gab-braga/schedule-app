@@ -1,43 +1,39 @@
 .header {
   padding: 1rem 2rem;
   background-color: var(--dark1);
+}
 
-  & .menu {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem 2rem;
+.header .menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
+}
 
-    & .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
+.header .menu .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
 
-      & .menu-option {
-        color: var(--text-gray);
-        font-size: 1rem;
-        text-decoration: none;
-        font-size: 1.2rem;
-      }
+.header .menu .links .menu-option {
+  color: var(--text-gray);
+  font-size: 1rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
 
-      & .menu-option.active {
-        color: var(--light);
-      }
+.header .menu .links .menu-option.active {
+  color: var(--light);
+}
 
-      & .menu-option:hover {
-        text-decoration: underline;
-      }
-    }
+.header .menu .links .menu-option:hover {
+  text-decoration: underline;
+}
 
-    & .control {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+.header .menu .control {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }

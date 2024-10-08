@@ -1,10 +1,12 @@
 import './style.css';
 import { updateById, deleteById } from '../../firebase/firestore';
 
+function formatDate(date) {
+  return new Date(date).toLocaleString('pt-br');
+}
+
 export default ({ id, content, time, done, update }) => {
-  function formatDate(date) {
-    return new Date(date).toLocaleString('pt-br');
-  }
+  
 
   async function remove() {
     await deleteById('tasks', id);

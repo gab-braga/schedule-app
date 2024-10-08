@@ -1,0 +1,24 @@
+.schedule {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule .panel {
+    flex: 1;
+    padding: 2rem;
+}
+
+.schedule .control {
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule .week {
+    padding-top: 15px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    overflow-x: auto;
+}

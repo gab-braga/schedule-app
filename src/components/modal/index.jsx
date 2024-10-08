@@ -30,12 +30,12 @@ export default ({ close, update }) => {
     <div className="bg-modal">
       <div className="modal">
         <h2>Nova Tarefa</h2>
-        <form onSubmit={handleSubmit(send)}>
+        <form className="form" onSubmit={handleSubmit(send)}>
           <label htmlFor="content">Tarefa:</label>
-          <input type="text" {...register('content', { required: true })} />
+          <input type="text" {...register("content", { required: true })} />
           <div className="control">
-            <button type='submit' className='btn'>{loading ? 'Carregando...' : 'Adicionar'}</button>
-            <button type="button" className='btn' onClick={() => close()}>
+            <button type="submit" className="btn">{loading ? "Carregando..." : "Adicionar"}</button>
+            <button type="button" className="btn" onClick={() => close()}>
               Fechar
             </button>
           </div>

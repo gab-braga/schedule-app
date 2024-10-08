@@ -1,13 +1,16 @@
-.home {
+.tasks {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.home .tasks {
+.tasks .panel {
   flex: 1;
   padding: 2rem;
+}
+
+.tasks .grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
@@ -17,7 +20,7 @@
 }
 
 @media (max-width: 768px) {
-  .home .tasks {
+  .tasks .grid {
     flex-direction: column;
   }
 }

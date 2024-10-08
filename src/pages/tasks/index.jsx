@@ -36,13 +36,15 @@ export default () => {
   if (!isAuthenticated) return <Navigate to="/signin" />;
 
   return (
-    <div className="home">
+    <div className="tasks">
       {modal && <Modal close={closeModal} update={updateData} />}
       <Header action={openModal} />
-      <div className="tasks">
-        {tasks.map((task, idx) => (
-          <Card {...task} key={idx} update={updateData} />
-        ))}
+      <div className="panel">
+        <div className="container grid">
+          {tasks.map((task, idx) => (
+            <Card {...task} key={idx} update={updateData} />
+          ))}
+        </div>
       </div>
     </div>
   );
