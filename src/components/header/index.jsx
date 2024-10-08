@@ -1,5 +1,5 @@
 import "./style.css";
-import { useAuth } from '../../context/auth';
+import { useAuth } from "../../context/auth";
 import { NavLink } from "react-router-dom";
 
 export default ({ action }) => {

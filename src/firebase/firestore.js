@@ -9,8 +9,8 @@ import {
   orderBy,
   query,
   updateDoc,
-} from 'firebase/firestore';
-import app from './config';
+} from "firebase/firestore";
+import app from "./config";
 
 const db = getFirestore(app);
 
@@ -29,7 +29,7 @@ async function findAll(userId, local, order) {
     query(
       collection(db, local),
       where("userId", "==", userId),
-      orderBy(order, 'desc')
+      orderBy(order, "desc")
     ),
   );
   querySnapshot.forEach((doc) => {

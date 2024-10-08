@@ -1,11 +1,11 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignIn from './pages/signin';
-import SignUp from './pages/signup';
-import Tasks from './pages/tasks';
-import Schedule from './pages/schedule';
-import Redirect from './pages/redirect';
-import Root from './pages/root';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignIn from "./pages/signin";
+import SignUp from "./pages/signup";
+import Tasks from "./pages/tasks";
+import Schedule from "./pages/schedule";
+import Redirect from "./pages/redirect";
+import Root from "./pages/root";
 
 function App() {
   return (

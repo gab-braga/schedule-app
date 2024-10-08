@@ -1,8 +1,8 @@
-import './style.css';
-import { create } from '../../firebase/firestore.js';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useAuth } from '../../context/auth.jsx';
+import "./style.css";
+import { create } from "../../firebase/firestore.js";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/auth.jsx";
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();
@@ -20,7 +20,7 @@ export default ({ close, update }) => {
       date: new Date(now),
       done: false
     };
-    await create('tasks', taskData);
+    await create("tasks", taskData);
     setLoading(false);
     update();
     close();

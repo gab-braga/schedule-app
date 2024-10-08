@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { getAuthUser, signIn, signInWithGoogle, signOut, signUp } from '../firebase/authentication';
+import { createContext, useContext, useEffect, useState } from "react";
+import { getAuthUser, signIn, signInWithGoogle, signOut, signUp } from "../firebase/authentication";
 
 const AuthContext = createContext();
 

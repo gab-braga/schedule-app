@@ -1,8 +1,8 @@
-import './style.css';
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useAuth } from '../../context/auth';
+import "./style.css";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../../context/auth";
 
 export default () => {
   const { handleSubmit, register } = useForm();

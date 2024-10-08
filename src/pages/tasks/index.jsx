@@ -1,11 +1,11 @@
-import './style.css';
-import { useEffect, useState } from 'react';
-import { findAll } from '../../firebase/firestore';
-import Modal from '../../components/modal';
-import Header from '../../components/header';
-import Card from '../../components/card';
-import { useAuth } from '../../context/auth';
-import { Navigate } from 'react-router-dom';
+import "./style.css";
+import { useEffect, useState } from "react";
+import { findAll } from "../../firebase/firestore";
+import Modal from "../../components/modal";
+import Header from "../../components/header";
+import Card from "../../components/card";
+import { useAuth } from "../../context/auth";
+import { Navigate } from "react-router-dom";
 
 export default () => {
   const [modal, setModal] = useState(false);
@@ -13,7 +13,7 @@ export default () => {
   const { isAuthenticated, user } = useAuth();
 
   async function loadTasks() {
-    const data = await findAll(user.uid, 'tasks', 'date');
+    const data = await findAll(user.uid, "tasks", "date");
     setTasks(data);
   }
 
