@@ -27,7 +27,7 @@
     border-radius: 1rem;
 }
 
-.day .title {
+.day .week-title {
     display: inline-block;
     padding: 0.5rem 1rem;
     text-align: center;
@@ -36,7 +36,7 @@
     border-bottom: 2px solid var(--dark2);
 }
 
-.day.today .title {
+.day.today .week-title {
     color: var(--light1);
 }
 
@@ -55,10 +55,37 @@
     color: var(--text-gray);
 }
 
-.day .items .task .description {
+.day .items .task .title {
     display: block;
     font-size: 1rem;
     line-height: 1.3rem;
+}
+
+.day .items .task .control {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.day .items .task .control .btn-icon {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.day .items .task .control .btn-icon img {
+    width: 16px;
+}
+
+.day .items .task.done .hours,
+.day .items .task.done .title {
+    text-decoration: line-through;
 }
 
 @media (max-width: 480px) {

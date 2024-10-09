@@ -1,8 +1,12 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { checkToday, formatDateToString, formatDayOfWeek } from "../../helpr/date";
-import { findScheduleByUser } from "../../service/task";
+import { deleteTask, findScheduleByUser, updateTask } from "../../service/task";
 import { useAuth } from "../../context/auth";
+
+import IconCheck from "../../assets/icons/check.svg";
+import IconDelete from "../../assets/icons/delete.svg";
+import IconEdit from "../../assets/icons/edit.svg";
 
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);
@@ -15,6 +19,16 @@ export default ({ day }) => {
         setTasks(data);
     }
 
+    async function handleCompleteTask(id) {
+        updateTask(id, { done: true });
+        loadData();
+    }
+
+    async function handlDeleteTask(id) {
+        deleteTask(id);
+        loadData();
+    }
+
     useEffect(() => {
         loadData();
         setIsToday(checkToday(day));
@@ -23,17 +37,30 @@ export default ({ day }) => {
     return (
         <div className={isToday ? "day today" : "day"}>
             <span className="flag"></span>
-            <span className="title">
+            <span className="week-title">
                 {formatDayOfWeek(day)}
             </span>
             <div className="items">
-                {tasks.map(({title, hourStart, hourEnd}, idx) => {
+                {tasks.map(({ id, done, origin, title, hourStart, hourEnd }, idx) => {
                     return (
-                        <div className="task" key={idx}>
-                            <div className="hours">
-                                {hourStart} - {hourEnd}
-                            </div>
-                            <span className="description">{title}</span>
+                        <div className={done ? "task done" : "task"} key={idx}>
+                            <div className="hours">{hourStart} - {hourEnd}</div>
+                            <span className="title">{title}</span>
+                            {!origin && (
+                                <div className="control">
+                                    <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
+                                        <img src={IconDelete} />
+                                    </button>
+                                    <button className="btn-icon" onClick={() => { }}>
+                                        <img src={IconEdit} />
+                                    </button>
+                                    {!done && (
+                                        <button className="btn-icon" onClick={() => handleCompleteTask(id)}>
+                                            <img src={IconCheck} />
+                                        </button>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     );
                 })}

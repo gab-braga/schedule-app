@@ -3,13 +3,13 @@ import { deleteTask, updateTask } from "../../service/task";
 import { formatLocalDate } from "../../helpr/date";
 
 export default ({ id, title, content, date, done, update }) => {
-  async function remove() {
+  async function handleDeleteTask() {
     await deleteTask(id);
     update();
   }
 
-  async function complete() {
-    await updateTask(id, { done: true });
+  async function handleCompleteTask() {
+    await updateTask("tasks", id, { done: true });
     update();
   }
 
@@ -21,8 +21,8 @@ export default ({ id, title, content, date, done, update }) => {
         <p>{content}</p>
       </div>
       <div className="control">
-        {!done && <button onClick={complete} className="btn sm">Concluir</button>}
-        <button onClick={remove} className="btn sm">Remover</button>
+        {!done && <button onClick={handleCompleteTask} className="btn sm">Concluir</button>}
+        <button onClick={handleDeleteTask} className="btn sm">Remover</button>
       </div>
     </div>
   );
