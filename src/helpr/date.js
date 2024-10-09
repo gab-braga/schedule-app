@@ -25,11 +25,45 @@ function checkToday(date) {
     return (formattedToday === formattedDate);
 }
 
+function getDate(dateStr) {
+    const [year, month, day] = dateStr.split("-");
+    return new Date(year, (month - 1), day);
+}
+
 function getNextWeek(dateStr, skip) {
-    const date = new Date(dateStr);
+    const date = getDate(dateStr);
     const dateNextWeek = new Date(date);
-    dateNextWeek.setDate(date.getDate() + (8 * skip));
+    const dayOfMonth = dateNextWeek.getDate();
+    dateNextWeek.setDate(dayOfMonth + (skip * 7));
     return formatDateToString(dateNextWeek);
 }
 
-export { formatLocalDate, formatDateToString, formatDayOfWeek, checkToday, getNextWeek };
+function getCurrentWeekDays(week) {
+    const daysOfWeek = [];
+
+    const date = new Date(Date.now());
+    date.setDate(date.getDate() + (week * 7));
+
+    const dayOfMonth = date.getDate();
+    const dayOfWeek = date.getDay();
+    const firstDayOfWeek = dayOfMonth - dayOfWeek + 1;
+    const startDate = new Date(date.setDate(firstDayOfWeek));
+
+    for (let i = 0; i < 7; i++) {
+        const currentDay = new Date(startDate);
+        currentDay.setDate(startDate.getDate() + i);
+        daysOfWeek.push(currentDay);
+    }
+
+    return daysOfWeek;
+}
+
+export {
+    formatLocalDate,
+    formatDateToString,
+    formatDayOfWeek,
+    checkToday,
+    getDate,
+    getNextWeek,
+    getCurrentWeekDays
+};

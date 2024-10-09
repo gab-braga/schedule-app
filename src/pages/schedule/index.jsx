@@ -5,29 +5,13 @@ import Day from "../../components/day";
 import { useAuth } from "../../context/auth";
 import { Navigate } from "react-router-dom";
 import Modal from "../../components/modal";
-
-function getCurrentWeekDays() {
-    const today = new Date(Date.now());
-    const daysOfWeek = [];
-
-    const dayOfMonth = today.getDate();
-    const dayOfWeek = today.getDay();
-    const firstDayOfWeek = dayOfMonth - dayOfWeek + 1;
-    const startDate = new Date(today.setDate(firstDayOfWeek));
-
-    for (let i = 0; i < 7; i++) {
-        const currentDay = new Date(startDate);
-        currentDay.setDate(startDate.getDate() + i);
-        daysOfWeek.push(currentDay);
-    }
-
-    return daysOfWeek;
-}
+import { getCurrentWeekDays } from "../../helpr/date";
 
 export default () => {
-    const { isAuthenticated } = useAuth();
-    const [modal, setModal] = useState(false);
+    const [weekNumber, setWeekNumber] = useState(0);
     const [week, setWeek] = useState([]);
+    const [modal, setModal] = useState(false);
+    const { isAuthenticated } = useAuth();
 
     function openModal() {
       setModal(true);
@@ -38,12 +22,12 @@ export default () => {
     }
 
     function updateWeek() {
-        setWeek(getCurrentWeekDays());
+        setWeek(getCurrentWeekDays(weekNumber));
     }
 
     useEffect(() => {
         updateWeek();
-    }, []);
+    }, [weekNumber]);
 
     if (!isAuthenticated) return <Navigate to="/signin" />;
 
@@ -53,8 +37,12 @@ export default () => {
             <Header action={openModal} />
             <div className="panel">
                 <div className="container control">
-                    <button className="btn sm">Anterior</button>
-                    <button className="btn sm">Próximo</button>
+                    <button className="btn sm" onClick={() => {
+                        setWeekNumber(num => num - 1);
+                    }}>Anterior</button>
+                    <button className="btn sm" onClick={() => {
+                        setWeekNumber(num => num + 1);
+                    }}>Próximo</button>
                 </div>
                 <div className="container week">
                     {week.map((day, idx) => <Day day={day} key={idx} />)}

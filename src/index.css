@@ -72,7 +72,7 @@ input.input:focus {
 
 .link {
   display: inline-block;
-  color: cornflowerblue;
+  color: var(--blue-flag);
 }
 
 .center {
