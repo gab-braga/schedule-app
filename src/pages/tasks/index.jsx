@@ -1,6 +1,6 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-import { findAll } from "../../firebase/firestore";
+import { findByCondition } from "../../firebase/firestore";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
 import Card from "../../components/card";
@@ -12,8 +12,8 @@ export default () => {
   const [tasks, setTasks] = useState([]);
   const { isAuthenticated, user } = useAuth();
 
-  async function loadTasks() {
-    const data = await findAll(user.uid, "tasks", "inserted");
+  async function loadData() {
+    const data = await findByCondition("tasks", "userId", user.uid, "inserted", "desc");
     setTasks(data);
   }
 
@@ -26,11 +26,11 @@ export default () => {
   }
 
   function updateData() {
-    loadTasks();
+    loadData();
   }
 
   useEffect(() => {
-    if (user) loadTasks();
+    if (user) loadData();
   }, [user]);
 
   if (!isAuthenticated) return <Navigate to="/signin" />;

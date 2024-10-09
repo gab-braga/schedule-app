@@ -23,16 +23,16 @@ async function create(local, data) {
   }
 }
 
-async function findAll(userId, local, order) {
+async function findByCondition(local, field, value, order, sort = "asc") {
   const docs = [];
   const querySnapshot = await getDocs(
     query(
       collection(db, local),
-      where("userId", "==", userId),
-      orderBy(order, "desc")
+      where(field, "==", value),
+      orderBy(order, sort)
     ),
   );
-  querySnapshot.forEach((doc) => {
+  querySnapshot.forEach(doc => {
     const data = {
       id: doc.id,
       ...doc.data(),
@@ -40,6 +40,25 @@ async function findAll(userId, local, order) {
     docs.push(data);
   });
   return docs;
+}
+
+async function findBetween(local, field, start, end, order, sort = "asc") {
+  const docs = [];
+  const querySnapshot = await getDocs(
+    query(
+      collection(db, local),
+      where(field, ">=", start),
+      where(field, "<=", end),
+      orderBy(order, sort)
+    )
+  );
+  querySnapshot.forEach(doc => {
+    const data = {
+      id: doc.id,
+      ...doc.data(),
+    }
+    docs.push(data);
+  });
 }
 
 async function deleteById(local, id) {
@@ -52,4 +71,4 @@ async function updateById(local, id, data) {
   const docSnap = await updateDoc(docRef, data);
 }
 
-export { create, findAll, deleteById, updateById };
+export { create, findByCondition, findBetween, deleteById, updateById };

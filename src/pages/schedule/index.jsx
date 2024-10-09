@@ -37,15 +37,19 @@ export default () => {
       setModal(false);
     }
 
-    useEffect(() => {
+    function updateWeek() {
         setWeek(getCurrentWeekDays());
+    }
+
+    useEffect(() => {
+        updateWeek();
     }, []);
 
     if (!isAuthenticated) return <Navigate to="/signin" />;
 
     return (
         <div className="schedule">
-            {modal && <Modal close={closeModal} />}
+            {modal && <Modal close={closeModal} update={updateWeek} />}
             <Header action={openModal} />
             <div className="panel">
                 <div className="container control">

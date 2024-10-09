@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style.css";
+import { findByCondition } from "../../firebase/firestore";
 
 function formatDayOfWeek(date) {
     const options = { weekday: "long" };
@@ -9,14 +10,33 @@ function formatDayOfWeek(date) {
     return `${dayString} / ${dayNumber}`;
 }
 
+function checkToday(day) {
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+    const formattedDate = day.toISOString().split("T")[0];
+    return (formattedToday === formattedDate);
+}
+
+function formatDateToString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);
+    const [tasks, setTasks] = useState([]);
+
+    async function loadData() {
+        const date = formatDateToString(day);
+        const data = await findByCondition("tasks", "date", date, "hourStart");
+        setTasks(data);
+    }
 
     useEffect(() => {
-        const today = new Date();
-        const formattedToday = today.toISOString().split("T")[0];
-        const formattedDate = day.toISOString().split("T")[0];
-        setIsToday(formattedToday === formattedDate);
+        loadData();
+        setIsToday(checkToday(day));
     }, [day]);
 
     return (
@@ -26,36 +46,16 @@ export default ({ day }) => {
                 {formatDayOfWeek(day)}
             </span>
             <div className="items">
-                <div className="task">
-                    <div className="hours">
-                        07:00 - 08:00
-                    </div>
-                    <span className="description">Seção de Academia</span>
-                </div>
-                <div className="task">
-                    <div className="hours">
-                        12:00 - 13:00
-                    </div>
-                    <span className="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                </div>
-                <div className="task">
-                    <div className="hours">
-                        12:00 - 13:00
-                    </div>
-                    <span className="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                </div>
-                <div className="task">
-                    <div className="hours">
-                        12:00 - 13:00
-                    </div>
-                    <span className="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                </div>
-                <div className="task">
-                    <div className="hours">
-                        12:00 - 13:00
-                    </div>
-                    <span className="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                </div>
+                {tasks.map(({title, hourStart, hourEnd}, idx) => {
+                    return (
+                        <div className="task" key={idx}>
+                            <div className="hours">
+                                {hourStart} - {hourEnd}
+                            </div>
+                            <span className="description">{title}</span>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

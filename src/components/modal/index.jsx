@@ -9,14 +9,26 @@ export default ({ close, update }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  async function send(dataForm) {
+  async function send({
+    title,
+    content,
+    date,
+    hourStart,
+    hourEnd,
+    repet,
+  }) {
     setLoading(true);
     const { uid } = user;
     const taskData = {
-      ...dataForm,
       userId: uid,
+      done: false,
+      title,
+      content,
+      date,
+      hourStart,
+      hourEnd,
+      repet,
       inserted: new Date(Date.now()),
-      done: false
     };
     await create("tasks", taskData);
     setLoading(false);

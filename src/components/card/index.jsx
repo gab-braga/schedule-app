@@ -15,7 +15,7 @@ export default ({ id, title, content, date, done, update }) => {
   }
 
   async function close() {
-    await updateById("tasks", id, { content, time, done: true });
+    await updateById("tasks", id, { done: true });
     update();
   }
 
