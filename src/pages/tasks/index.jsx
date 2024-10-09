@@ -1,11 +1,11 @@
 import "./style.css";
 import { useEffect, useState } from "react";
-import { findByCondition } from "../../firebase/firestore";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
 import Card from "../../components/card";
 import { useAuth } from "../../context/auth";
 import { Navigate } from "react-router-dom";
+import { findTasksByUser } from "../../service/task";
 
 export default () => {
   const [modal, setModal] = useState(false);
@@ -13,7 +13,7 @@ export default () => {
   const { isAuthenticated, user } = useAuth();
 
   async function loadData() {
-    const data = await findByCondition("tasks", "userId", user.uid, "inserted", "desc");
+    const data = await findTasksByUser(user.uid);
     setTasks(data);
   }
 

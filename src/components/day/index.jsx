@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
 import "./style.css";
-import { findByCondition } from "../../firebase/firestore";
+import { useEffect, useState } from "react";
 import { checkToday, formatDateToString, formatDayOfWeek } from "../../helpr/date";
+import { findScheduleByUser } from "../../service/task";
+import { useAuth } from "../../context/auth";
 
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const { user } = useAuth();
 
     async function loadData() {
         const date = formatDateToString(day);
-        const data = await findByCondition("tasks", "date", date, "hourStart");
+        const data = await findScheduleByUser(user.uid, date);
         setTasks(data);
     }
 

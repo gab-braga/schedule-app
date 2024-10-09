@@ -36,9 +36,9 @@ export default ({ close, update }) => {
       done: false,
       title, content, date,
       hourStart, hourEnd,
+      firstId: firstId || null,
       inserted: new Date(Date.now()),
     };
-    if (firstId) taskData.firstId = firstId;
     return await create("tasks", taskData);
   }
 

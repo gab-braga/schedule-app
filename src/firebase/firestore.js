@@ -23,15 +23,25 @@ async function create(local, data) {
   }
 }
 
-async function findByCondition(local, field, value, order, sort = "asc") {
+async function findByConditions(local, filters, order) {
   const docs = [];
+
+  const constraints = [
+    ...filters.map(
+      ({ field, op, value }) => {
+        return where(field, op, value)
+      }
+    ),
+    orderBy(order.field, order.sort)
+  ];
+
   const querySnapshot = await getDocs(
     query(
       collection(db, local),
-      where(field, "==", value),
-      orderBy(order, sort)
+      ...constraints,
     ),
   );
+
   querySnapshot.forEach(doc => {
     const data = {
       id: doc.id,
@@ -39,26 +49,8 @@ async function findByCondition(local, field, value, order, sort = "asc") {
     };
     docs.push(data);
   });
+  
   return docs;
-}
-
-async function findBetween(local, field, start, end, order, sort = "asc") {
-  const docs = [];
-  const querySnapshot = await getDocs(
-    query(
-      collection(db, local),
-      where(field, ">=", start),
-      where(field, "<=", end),
-      orderBy(order, sort)
-    )
-  );
-  querySnapshot.forEach(doc => {
-    const data = {
-      id: doc.id,
-      ...doc.data(),
-    }
-    docs.push(data);
-  });
 }
 
 async function deleteById(local, id) {
@@ -71,4 +63,4 @@ async function updateById(local, id, data) {
   const docSnap = await updateDoc(docRef, data);
 }
 
-export { create, findByCondition, findBetween, deleteById, updateById };
+export { create, findByConditions, deleteById, updateById };

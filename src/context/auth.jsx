@@ -30,13 +30,8 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getAuthUser(user => {
-      if(user) {
-        setUser(user);
-        setAuthenticated(true);
-      } else {
-        setUser(null);
-        setAuthenticated(false);
-      }
+      setUser(user);
+      setAuthenticated(!!user);
       setLoading(false);
     });
   }, []);
