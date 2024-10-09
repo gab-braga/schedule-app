@@ -1,15 +1,15 @@
 import "./style.css";
-import { updateById, deleteById } from "../../firebase/firestore";
+import { deleteTask, updateTask } from "../../service/task";
 import { formatLocalDate } from "../../helpr/date";
 
 export default ({ id, title, content, date, done, update }) => {
   async function remove() {
-    await deleteById("tasks", id);
+    await deleteTask(id);
     update();
   }
 
-  async function close() {
-    await updateById("tasks", id, { done: true });
+  async function complete() {
+    await updateTask(id, { done: true });
     update();
   }
 
@@ -21,7 +21,7 @@ export default ({ id, title, content, date, done, update }) => {
         <p>{content}</p>
       </div>
       <div className="control">
-        {!done && <button onClick={close} className="btn sm">Concluir</button>}
+        {!done && <button onClick={complete} className="btn sm">Concluir</button>}
         <button onClick={remove} className="btn sm">Remover</button>
       </div>
     </div>

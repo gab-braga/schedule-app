@@ -1,4 +1,4 @@
-import { findByConditions } from "../firebase/firestore";
+import { deleteByFilters, deleteById, findByConditions, updateByFilters, updateById } from "../firebase/firestore";
 
 async function findTasksByUser(userId) {
     const filters = [
@@ -18,4 +18,21 @@ async function findScheduleByUser(userId, date) {
     return await findByConditions("tasks", filters, order);
 }
 
-export { findTasksByUser, findScheduleByUser };
+async function deleteTask(id) {
+    const filters = [{ field: "firstId", op: "==", value: id }];
+    await deleteById("tasks", id);
+    await deleteByFilters("tasks", filters);
+}
+
+async function updateTask(id, data) {
+    const filters = [{ field: "firstId", op: "==", value: id }];
+    await updateById("tasks", id, data);
+    await updateByFilters("tasks", filters, data);
+}
+
+export {
+    findTasksByUser,
+    findScheduleByUser,
+    deleteTask,
+    updateTask
+};

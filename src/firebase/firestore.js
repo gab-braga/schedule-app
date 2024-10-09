@@ -28,9 +28,7 @@ async function findByConditions(local, filters, order) {
 
   const constraints = [
     ...filters.map(
-      ({ field, op, value }) => {
-        return where(field, op, value)
-      }
+      ({ field, op, value }) => { return where(field, op, value) }
     ),
     orderBy(order.field, order.sort)
   ];
@@ -49,18 +47,53 @@ async function findByConditions(local, filters, order) {
     };
     docs.push(data);
   });
-  
+
   return docs;
 }
 
 async function deleteById(local, id) {
   const docRef = doc(db, local, id);
-  const docSnap = await deleteDoc(docRef);
+  return await deleteDoc(docRef);
 }
 
 async function updateById(local, id, data) {
   const docRef = doc(db, local, id);
-  const docSnap = await updateDoc(docRef, data);
+  return await updateDoc(docRef, data);
 }
 
-export { create, findByConditions, deleteById, updateById };
+async function deleteByFilters(local, filters) {
+  const constraints = [
+    ...filters.map(({ field, op, value }) => where(field, op, value))
+  ];
+  const querySnapshot = await getDocs(
+    query(
+      collection(db, local),
+      ...constraints
+    )
+  );
+  const deletePromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref));
+  return await Promise.all(deletePromises);
+}
+
+async function updateByFilters(local, filters, data) {
+  const constraints = [
+    ...filters.map(({ field, op, value }) => where(field, op, value))
+  ];
+  const querySnapshot = await getDocs(
+    query(
+      collection(db, local),
+      ...constraints
+    )
+  );
+  const updatePromises = querySnapshot.docs.map(doc => updateDoc(doc.ref, data));
+  return await Promise.all(updatePromises);
+}
+
+export {
+  create,
+  findByConditions,
+  deleteById,
+  updateById,
+  deleteByFilters,
+  updateByFilters
+};
