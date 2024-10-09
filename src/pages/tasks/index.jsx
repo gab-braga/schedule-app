@@ -13,7 +13,7 @@ export default () => {
   const { isAuthenticated, user } = useAuth();
 
   async function loadTasks() {
-    const data = await findAll(user.uid, "tasks", "date");
+    const data = await findAll(user.uid, "tasks", "inserted");
     setTasks(data);
   }
 

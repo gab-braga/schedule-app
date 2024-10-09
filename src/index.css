@@ -55,7 +55,7 @@ button.btn.sm {
   font-size: 0.8rem;
 }
 
-input {
+input.input {
   padding: 0.8rem 1rem;
   font-size: 1rem;
   color: var(--light1);
@@ -65,7 +65,7 @@ input {
 }
 
 button.btn:hover,
-input:focus {
+input.input:focus {
   border: 1px solid var(--light1);
   outline: none;
 }

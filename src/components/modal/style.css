@@ -1,11 +1,12 @@
 .bg-modal {
-  position: absolute;
+  position: fixed;
   background-color: #000000aa;
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 99999;
 }
 
 .modal {
@@ -33,9 +34,18 @@
   outline: none;
 }
 
-.modal .form .control {
-  padding-top: 0.5rem;
-  display: flex;
-  justify-content: start;
-  gap: 0.8rem;
+.modal .double-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modal .double-column .input {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .modal .input {
+    font-size: 0.8rem;
+  }
 }

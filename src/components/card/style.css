@@ -10,9 +10,14 @@
   gap: 1rem;
 }
 
-.card small {
+.card .date {
   color: var(--text-gray);
   font-size: 0.8rem;
+}
+
+.card .title {
+  font-size: 1.3rem;
+  margin: 0;
 }
 
 .card .content {

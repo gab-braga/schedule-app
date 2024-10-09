@@ -1,11 +1,12 @@
 import "./style.css";
 import { updateById, deleteById } from "../../firebase/firestore";
 
-function formatDate(date) {
-  return new Date(date).toLocaleString("pt-br");
+function formatDate(dateStr) {
+  const [year, month, day] = dateStr.split("-");
+  return `${day}/${month}/${year}`;
 }
 
-export default ({ id, content, time, done, update }) => {
+export default ({ id, title, content, date, done, update }) => {
   
 
   async function remove() {
@@ -20,7 +21,8 @@ export default ({ id, content, time, done, update }) => {
 
   return (
     <div className={done ? "card done" : "card"}>
-      <small>{formatDate(time)}</small>
+      <small className="date">{formatDate(date)}</small>
+      <h2 className="title">{title}</h2>
       <div className="content">
         <p>{content}</p>
       </div>
