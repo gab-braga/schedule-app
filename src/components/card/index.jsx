@@ -1,14 +1,8 @@
 import "./style.css";
 import { updateById, deleteById } from "../../firebase/firestore";
-
-function formatDate(dateStr) {
-  const [year, month, day] = dateStr.split("-");
-  return `${day}/${month}/${year}`;
-}
+import { formatLocalDate } from "../../helpr/date";
 
 export default ({ id, title, content, date, done, update }) => {
-  
-
   async function remove() {
     await deleteById("tasks", id);
     update();
@@ -21,7 +15,7 @@ export default ({ id, title, content, date, done, update }) => {
 
   return (
     <div className={done ? "card done" : "card"}>
-      <small className="date">{formatDate(date)}</small>
+      <small className="date">{formatLocalDate(date)}</small>
       <h2 className="title">{title}</h2>
       <div className="content">
         <p>{content}</p>

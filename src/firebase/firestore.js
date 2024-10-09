@@ -16,7 +16,7 @@ const db = getFirestore(app);
 
 async function create(local, data) {
   try {
-    await addDoc(collection(db, local), data);
+    return await addDoc(collection(db, local), data);
   } catch (err) {
     console.error(err);
     throw new Error(`Algo de errado em salvar na coleção ${local}.`);

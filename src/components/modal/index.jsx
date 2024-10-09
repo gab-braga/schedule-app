@@ -3,37 +3,43 @@ import { create } from "../../firebase/firestore.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/auth.jsx";
+import { getNextWeek } from "../../helpr/date.js";
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  async function send({
-    title,
-    content,
-    date,
-    hourStart,
-    hourEnd,
-    repet,
-  }) {
+  async function send(data) {
     setLoading(true);
+    if (!data.repet) await saveTask(data);
+    else await saveTasksRepeatedly(data, data.times);
+    setLoading(false);
+    update();
+    close();
+  }
+
+  async function saveTasksRepeatedly(data, times) {
+    const { id } = await saveTask({ ...data });
+    for (let i = 1; i < times; i++) {
+      const date = getNextWeek(data.date, i);
+      await saveTask({ ...data, date, firstId: id });
+    }
+  }
+
+  async function saveTask({
+    title, content, date, hourStart, hourEnd, firstId
+  }) {
     const { uid } = user;
     const taskData = {
       userId: uid,
       done: false,
-      title,
-      content,
-      date,
-      hourStart,
-      hourEnd,
-      repet,
+      title, content, date,
+      hourStart, hourEnd,
       inserted: new Date(Date.now()),
     };
-    await create("tasks", taskData);
-    setLoading(false);
-    update();
-    close();
+    if (firstId) taskData.firstId = firstId;
+    return await create("tasks", taskData);
   }
 
   return (
@@ -61,9 +67,15 @@ export default ({ close, update }) => {
             </div>
           </div>
 
-          <div>
-            <label htmlFor="repet">Repetir:</label>
-            <input type="checkbox" id="repet" {...register("repet")} />
+          <div className="double-column">
+            <div>
+              <label htmlFor="repet">Repetir:</label>
+              <input type="checkbox" id="repet" {...register("repet")} />
+            </div>
+            <div>
+              <label htmlFor="times">Quant:</label>
+              <input type="number" className="input" id="times" {...register("times")} />
+            </div>
           </div>
 
           <div className="double-column">
