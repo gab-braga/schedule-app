@@ -10,7 +10,7 @@
 }
 
 .modal {
-  width: clamp(200px, 90%, 400px);
+  width: clamp(200px, 90%, 600px);
   background-color: var(--dark2);
   border-radius: 1rem;
   padding: 2rem;
@@ -24,10 +24,26 @@
 }
 
 .modal .form {
+  max-height: 70vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin: 1rem 0;
+}
+
+.modal .form .group {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.modal .form .group-inline {
+  display: flex;
+  justify-content: start;
+  gap: 0.5rem;
 }
 
 .modal .form input:focus {
@@ -37,6 +53,7 @@
 .modal .double-column {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: end;
   gap: 1rem;
 }
 
@@ -47,5 +64,9 @@
 @media (max-width: 480px) {
   .modal .input {
     font-size: 0.8rem;
+  }
+
+  .modal .double-column {
+    grid-template-columns: 1fr;
   }
 }

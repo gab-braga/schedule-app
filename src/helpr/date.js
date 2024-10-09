@@ -30,6 +30,14 @@ function getDate(dateStr) {
     return new Date(year, (month - 1), day);
 }
 
+function getNextDay(dateStr, skip) {
+    const date = getDate(dateStr);
+    const dateNextDay = new Date(date);
+    const dayOfMonth = dateNextDay.getDate();
+    dateNextDay.setDate(dayOfMonth + skip);
+    return formatDateToString(dateNextDay);
+}
+
 function getNextWeek(dateStr, skip) {
     const date = getDate(dateStr);
     const dateNextWeek = new Date(date);
@@ -64,6 +72,7 @@ export {
     formatDayOfWeek,
     checkToday,
     getDate,
+    getNextDay,
     getNextWeek,
     getCurrentWeekDays
 };
