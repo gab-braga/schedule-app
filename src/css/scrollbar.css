@@ -1,0 +1,18 @@
+*:not(html, body)::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*:not(html, body)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*:not(html, body)::-webkit-scrollbar-thumb {
+  background: var(--text-gray);
+  border-radius: 10px;
+}
+
+*:not(html, body).scroll-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-gray);
+}

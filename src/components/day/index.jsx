@@ -39,17 +39,20 @@ export default ({ day }) => {
             <span className="week-title">
                 {formatDayOfWeek(day)}
             </span>
+
             <div className="items">
                 {tasks.map(({ id, done, origin, title, hourStart, hourEnd }, idx) => {
                     return (
                         <div className={done ? "task done" : "task"} key={idx}>
                             <div className="hours">{hourStart} - {hourEnd}</div>
                             <span className="title">{title}</span>
+
                             {!origin && (
                                 <div className="control">
                                     <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
                                         <img src={IconDelete} />
                                     </button>
+
                                     {!done && (
                                         <button className="btn-icon" onClick={() => handleCompleteTask(id)}>
                                             <img src={IconCheck} />

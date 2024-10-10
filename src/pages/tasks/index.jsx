@@ -1,11 +1,11 @@
 import "./style.css";
+import { findTasksByUser } from "../../service/task";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth";
+import { Navigate } from "react-router-dom";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
 import Card from "../../components/card";
-import { useAuth } from "../../context/auth";
-import { Navigate } from "react-router-dom";
-import { findTasksByUser } from "../../service/task";
 
 export default () => {
   const [modal, setModal] = useState(false);
@@ -38,7 +38,9 @@ export default () => {
   return (
     <div className="tasks">
       {modal && <Modal close={closeModal} update={updateData} />}
+
       <Header action={openModal} />
+
       <div className="panel">
         <div className="container grid">
           {tasks.map((task, idx) => (

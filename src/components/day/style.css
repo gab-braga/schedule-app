@@ -1,7 +1,7 @@
 .day {
+    flex: 1;
     min-width: 160px;
     min-height: 400px;
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -62,8 +62,10 @@
 
 .day .items .task .control {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
+    margin: 0 -5px;
 }
 
 .day .items .task .control .btn-icon {

@@ -1,0 +1,32 @@
+button.btn {
+    font-size: 1rem;
+    color: var(--light1);
+    text-wrap: nowrap;
+    padding: 0.8rem 1rem;
+    background-color: var(--dark3);
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+button.btn .icon {
+    width: 1rem;
+}
+
+button.btn.sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+button.btn.sm .icon {
+    width: 0.8rem;
+}
+
+button.btn:hover {
+    border: 1px solid var(--light1);
+    outline: none;
+}

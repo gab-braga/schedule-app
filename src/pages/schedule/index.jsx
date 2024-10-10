@@ -1,11 +1,11 @@
 import "./style.css";
-import { useEffect, useState } from "react";
-import Header from "../../components/header";
-import Day from "../../components/day";
+import { getCurrentWeekDays } from "../../helpr/date";
 import { useAuth } from "../../context/auth";
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Modal from "../../components/modal";
-import { getCurrentWeekDays } from "../../helpr/date";
+import Header from "../../components/header";
+import Day from "../../components/day";
 
 import IconArrowBack from "../../assets/icons/arrow_back.svg";
 import IconArrowForward from "../../assets/icons/arrow_forward.svg";
@@ -45,18 +45,22 @@ export default () => {
     return (
         <div className="schedule">
             {modal && <Modal close={closeModal} update={updateWeek} />}
+
             <Header action={openModal} />
+
             <div className="panel">
                 <div className="container control">
                     <button className="btn sm" onClick={backWeek}>
                         <img src={IconArrowBack} className="icon" />
                         Anterior
                     </button>
+
                     <button className="btn sm" onClick={nextWeek}>
                         Próximo
                         <img src={IconArrowForward} className="icon" />
                     </button>
                 </div>
+                
                 <div className="container week">
                     {week.map((day, idx) => <Day day={day} key={idx} />)}
                 </div>

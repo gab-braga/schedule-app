@@ -1,0 +1,38 @@
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --light1: #eaeaea;
+    --light2: #dfdfdf;
+    --light3: #cfcfcf;
+    --dark1: #1C1D22;
+    --dark2: #222327;
+    --dark3: #292a2e;
+    --blue-flag: #6495ed;
+    --text-gray: #6D6E73;
+  }
+  
+  body {
+    background-color: var(--dark2);
+  }
+  
+  h1,
+  h2,
+  h3,
+  p,
+  label {
+    color: var(--light1);
+  }
+  
+  body,
+  div,
+  header,
+  main,
+  section,
+  article,
+  footer {
+    margin: 0;
+    padding: 0;
+  }

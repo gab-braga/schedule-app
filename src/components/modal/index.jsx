@@ -1,9 +1,9 @@
 import "./style.css";
+import { getNextDay, getNextWeek } from "../../helpr/date.js";
 import { create } from "../../firebase/firestore.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/auth.jsx";
-import { getNextDay, getNextWeek } from "../../helpr/date.js";
 
 import IconAdd from "../../assets/icons/add.svg";
 import IconClose from "../../assets/icons/close.svg";
@@ -71,13 +71,13 @@ export default ({ close, update }) => {
         <form className="form" onSubmit={handleSubmit(send)}>
           <div className="group">
             <label htmlFor="title">Tarefa:</label>
-            <input type="text" className="input" id="title"
+            <input type="text" className="input" id="title" autoComplete="off"
               {...register("title", { required: true })} />
           </div>
 
           <div className="group">
             <label htmlFor="content">Descrição:</label>
-            <input type="text" className="input" id="content"
+            <input type="text" className="input" id="content" autoComplete="off"
               {...register("content", { required: true })} />
           </div>
 
@@ -93,7 +93,7 @@ export default ({ close, update }) => {
               <input type="time" className="input" id="hourStart"
                 {...register("hourStart", { required: true })} />
             </div>
-            
+
             <div className="group">
               <label htmlFor="hourEnd">Encerra:</label>
               <input type="time" className="input" id="hourEnd"
@@ -139,6 +139,7 @@ export default ({ close, update }) => {
                   <img src={IconAdd} />
                 </>}
             </button>
+
             <button type="button" className="btn" onClick={() => close()}>
               Fechar
               <img src={IconClose} />

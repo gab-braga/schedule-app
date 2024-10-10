@@ -46,7 +46,11 @@
   gap: 0.5rem;
 }
 
-.modal .form input:focus {
+.modal .form .input {
+  width: 100%;
+}
+
+.modal .form .input:focus {
   outline: none;
 }
 
@@ -57,12 +61,8 @@
   gap: 1rem;
 }
 
-.modal .double-column .input {
-  width: 100%;
-}
-
 @media (max-width: 480px) {
-  .modal .input {
+  .modal .form .input {
     font-size: 0.8rem;
   }
 
