@@ -1,5 +1,11 @@
-# To-Do List
-Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida utilizando React para a interface do usuário e Firebase para o backend.
+# Agenda
+Este projeto é uma aplicação de agenda desenvolvida utilizando React para a interface do usuário e Firebase para o backend.
+
+## Tecnologias Utilizadas
+* React
+* Firebase Firestore
+* Firebase Authentication
+* Firebase Hosting
 
 ## Funcionalidades
 * Autenticação com Firebase Authentication
@@ -7,12 +13,6 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida ut
 * Marcar tarefas como concluídas
 * Armazenamento com Firebase Firestore
 * Interface amigável e responsiva
-
-## Tecnologias Utilizadas
-* React
-* Firebase Firestore
-* Firebase Authentication
-* Firebase Hosting
 
 ## Visualização
 ### Autenticação
@@ -27,7 +27,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) desenvolvida ut
 ## Instalação e Configuração
 1. Clone o repositório
 ```
-git clone https://github.com/gab-braga/to-do-list.git
+git clone https://github.com/gab-braga/schedule-app.git
 cd to-do-list
 ```
 2. Instale as dependências
