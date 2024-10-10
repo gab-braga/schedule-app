@@ -2,6 +2,7 @@
   flex: 1 1 260px;
   width: 100%;
   max-width: 400px;
+  min-width: 300px;
   min-height: 240px;
   max-height: 320px;
   display: flex;
@@ -18,8 +19,8 @@
 }
 
 .card .title {
-  font-size: 1.3rem;
-  line-height: 1.8rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
   max-height: 3.6rem;
   overflow-y: auto;
   margin: 0;
@@ -58,6 +59,7 @@
   .card {
     flex: 1;
     min-height: initial;
+    min-width: initial;
     max-height: initial;
     max-width: initial;
   }
