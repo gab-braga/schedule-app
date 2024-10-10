@@ -41,8 +41,8 @@ export default () => {
 
       <Header action={openModal} />
 
-      <div className="panel">
-        <div className="container grid">
+      <div className="tasks-panel">
+        <div className="container tasks-grid">
           {tasks.map((task, idx) => (
             <Card {...task} key={idx} update={updateData} />
           ))}

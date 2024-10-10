@@ -48,20 +48,20 @@ export default () => {
 
             <Header action={openModal} />
 
-            <div className="panel">
-                <div className="container control">
-                    <button className="btn sm" onClick={backWeek}>
+            <div className="schedule-panel">
+                <div className="schedule-control">
+                    <button className="button" onClick={backWeek}>
                         <img src={IconArrowBack} className="icon" />
                         Anterior
                     </button>
 
-                    <button className="btn sm" onClick={nextWeek}>
+                    <button className="button" onClick={nextWeek}>
                         Próximo
                         <img src={IconArrowForward} className="icon" />
                     </button>
                 </div>
                 
-                <div className="container week">
+                <div className="schedule-week">
                     {week.map((day, idx) => <Day day={day} key={idx} />)}
                 </div>
             </div>

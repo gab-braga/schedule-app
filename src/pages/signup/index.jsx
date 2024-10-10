@@ -36,7 +36,7 @@ export default () => {
     <div className="signup">
       <form onSubmit={handleSubmit(handleSignUp)} className="form">
         <h2>{message ? message : "Cadastre-se"}</h2>
-        <button type="button" className="btn" onClick={handleSignInGoogle}>Entrar com Google</button>
+        <button type="button" className="button" onClick={handleSignInGoogle}>Entrar com Google</button>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input type="email" className="input" {...register("email", { required: true })} />
@@ -45,8 +45,8 @@ export default () => {
           <label htmlFor="password">Senha</label>
           <input type="password" className="input" {...register("password", { required: true })} />
         </div>
-        <button type="submit" className="btn">Cadastrar</button>
-        <Link to="/signin" className="link center">Login</Link>
+        <button type="submit" className="button">Cadastrar</button>
+        <Link to="/signin" className="link">Login</Link>
       </form>
     </div>
   );

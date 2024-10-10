@@ -29,14 +29,12 @@ export default ({ id, title, content, date, done, update }) => {
 
       <div className="control">
         {!done && (
-          <button onClick={handleCompleteTask} className="btn sm">
-            Concluir
+          <button onClick={handleCompleteTask} className="button" data-title="Concluir">
             <img src={IconCheck} className="icon" />
           </button>
         )}
 
-        <button onClick={handleDeleteTask} className="btn sm">
-          Remover
+        <button onClick={handleDeleteTask} className="button" data-title="Remover">
           <img src={IconDelete} className="icon" />
         </button>
       </div>

@@ -4,21 +4,29 @@
     flex-direction: column;
 }
 
-.schedule .panel {
+.schedule .schedule-panel {
     flex: 1;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    gap: 1rem;
 }
 
-.schedule .control {
+.schedule .schedule-control {
     display: flex;
     justify-content: space-between;
 }
 
-.schedule .week {
-    padding-top: 15px;
+.schedule .schedule-week {
     flex: 1;
     display: flex;
     justify-content: space-between;
+    align-items: stretch;
     gap: 1rem;
     overflow-x: auto;
 }

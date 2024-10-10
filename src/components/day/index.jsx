@@ -4,8 +4,9 @@ import { checkToday, formatDateToString, formatDayOfWeek } from "../../helpr/dat
 import { deleteTask, findScheduleByUser, updateTask } from "../../service/task";
 import { useAuth } from "../../context/auth";
 
-import IconCheck from "../../assets/icons/check.svg";
 import IconDelete from "../../assets/icons/delete.svg";
+import IconCheck from "../../assets/icons/check.svg";
+import IconRefresh from "../../assets/icons/refresh.svg";
 
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);
@@ -18,13 +19,18 @@ export default ({ day }) => {
         setTasks(data);
     }
 
+    async function handlDeleteTask(id) {
+        deleteTask(id);
+        loadData();
+    }
+
     async function handleCompleteTask(id) {
         updateTask(id, { done: true });
         loadData();
     }
 
-    async function handlDeleteTask(id) {
-        deleteTask(id);
+    async function handleOpenTask(id) {
+        updateTask(id, { done: false });
         loadData();
     }
 
@@ -35,25 +41,29 @@ export default ({ day }) => {
 
     return (
         <div className={isToday ? "day today" : "day"}>
-            <span className="flag"></span>
-            <span className="week-title">
+            <span className="day-flag"></span>
+            <span className="day-title">
                 {formatDayOfWeek(day)}
             </span>
 
-            <div className="items">
+            <div className="day-items">
                 {tasks.map(({ id, done, origin, title, hourStart, hourEnd }, idx) => {
                     return (
                         <div className={done ? "task done" : "task"} key={idx}>
-                            <div className="hours">{hourStart} - {hourEnd}</div>
-                            <span className="title">{title}</span>
+                            <div className="task-hours">{hourStart} - {hourEnd}</div>
+                            <span className="task-title">{title}</span>
 
                             {!origin && (
-                                <div className="control">
+                                <div className="task-control">
                                     <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
                                         <img src={IconDelete} />
                                     </button>
 
-                                    {!done && (
+                                    {done ? (
+                                        <button className="btn-icon" onClick={() => handleOpenTask(id)}>
+                                            <img src={IconRefresh} />
+                                        </button>
+                                    ) : (
                                         <button className="btn-icon" onClick={() => handleCompleteTask(id)}>
                                             <img src={IconCheck} />
                                         </button>

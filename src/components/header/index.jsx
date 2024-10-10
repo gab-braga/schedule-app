@@ -8,24 +8,22 @@ import IconLogout from "../..//assets/icons/logout.svg";
 export default ({ action }) => {
   const { logout } = useAuth();
 
-  const getMenuOptionClass = data => data.isActive ? "menu-option active" : "menu-option";
+  const getMenuOptionClass = data => data.isActive ? "header-option active" : "header-option";
 
   return (
     <header className="header">
-      <div className="container menu">
-        <nav className="links">
+      <div className="container header-menu">
+        <nav className="header-links">
           <NavLink to="/" className={getMenuOptionClass}>Tarefas</NavLink>
           <NavLink to="/schedule" className={getMenuOptionClass}>Agenda</NavLink>
         </nav>
 
-        <div className="control">
-          <button onClick={() => action(true)} className="btn sm">
-            Novo
+        <div className="header-control">
+          <button onClick={() => action(true)} className="button" data-title="Novo">
             <img src={IconAdd} className="icon" />
           </button>
 
-          <button onClick={logout} className="btn sm">
-            Sair
+          <button onClick={logout} className="button" data-title="Sair">
             <img src={IconLogout} className="icon" />
           </button>
         </div>

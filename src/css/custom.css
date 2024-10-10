@@ -1,10 +1,6 @@
 .link {
-    display: inline-block;
     color: var(--blue-flag);
-}
-
-.center {
-    margin: 0 auto;
+    text-decoration: none;
 }
 
 .container {

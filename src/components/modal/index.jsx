@@ -131,18 +131,18 @@ export default ({ close, update }) => {
           )}
 
           <div className="double-column">
-            <button type="submit" className="btn" disabled={loading}>
+            <button type="submit" className="button" disabled={loading}>
               {loading ?
                 "Carregando..." :
                 <>
                   Adicionar
-                  <img src={IconAdd} />
+                  <img src={IconAdd} className="icon" />
                 </>}
             </button>
 
-            <button type="button" className="btn" onClick={() => close()}>
+            <button type="button" className="button" onClick={() => close()}>
               Fechar
-              <img src={IconClose} />
+              <img src={IconClose} className="icon" />
             </button>
           </div>
         </form>

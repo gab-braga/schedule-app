@@ -1,0 +1,22 @@
+body {
+    background-color: var(--dark2);
+}
+
+h1,
+h2,
+h3,
+p,
+label {
+    color: var(--light1);
+}
+
+body,
+div,
+header,
+main,
+section,
+article,
+footer {
+    margin: 0;
+    padding: 0;
+}
