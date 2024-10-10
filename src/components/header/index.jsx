@@ -2,6 +2,9 @@ import "./style.css";
 import { useAuth } from "../../context/auth";
 import { NavLink } from "react-router-dom";
 
+import IconAdd from "../..//assets/icons/add.svg";
+import IconLogout from "../..//assets/icons/logout.svg";
+
 export default ({ action }) => {
   const { logout } = useAuth();
   
@@ -16,10 +19,12 @@ export default ({ action }) => {
         </nav>
         <div className="control">
           <button onClick={() => action(true)} className="btn sm">
-            Novo &#43;
+            Novo
+            <img src={IconAdd} className="icon" />
           </button>
           <button onClick={logout} className="btn sm">
-            Sair &#8702;
+            Sair
+            <img src={IconLogout} className="icon" />
           </button>
         </div>
       </div>

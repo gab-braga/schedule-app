@@ -6,7 +6,6 @@ import { useAuth } from "../../context/auth";
 
 import IconCheck from "../../assets/icons/check.svg";
 import IconDelete from "../../assets/icons/delete.svg";
-import IconEdit from "../../assets/icons/edit.svg";
 
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);
@@ -50,9 +49,6 @@ export default ({ day }) => {
                                 <div className="control">
                                     <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
                                         <img src={IconDelete} />
-                                    </button>
-                                    <button className="btn-icon" onClick={() => { }}>
-                                        <img src={IconEdit} />
                                     </button>
                                     {!done && (
                                         <button className="btn-icon" onClick={() => handleCompleteTask(id)}>

@@ -9,7 +9,7 @@ export default ({ id, title, content, date, done, update }) => {
   }
 
   async function handleCompleteTask() {
-    await updateTask("tasks", id, { done: true });
+    await updateTask(id, { done: true });
     update();
   }
 
@@ -21,8 +21,14 @@ export default ({ id, title, content, date, done, update }) => {
         <p>{content}</p>
       </div>
       <div className="control">
-        {!done && <button onClick={handleCompleteTask} className="btn sm">Concluir</button>}
-        <button onClick={handleDeleteTask} className="btn sm">Remover</button>
+        {!done && (
+          <button onClick={handleCompleteTask} className="btn sm">
+            Concluir
+          </button>
+        )}
+        <button onClick={handleDeleteTask} className="btn sm">
+          Remover
+        </button>
       </div>
     </div>
   );

@@ -8,7 +8,6 @@
     background: var(--dark3);
     border-radius: 1rem;
     overflow: hidden;
-    border: 2px solid transparent;
     position: relative;
 }
 
@@ -19,17 +18,17 @@
 .day.today .flag {
     display: inline-block;
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    width: 1rem;
-    height: 1rem;
+    top: 15px;
+    left: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     background: var(--blue-flag);
-    border-radius: 1rem;
 }
 
 .day .week-title {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     text-align: center;
     color: var(--text-gray);
     font-weight: 500;

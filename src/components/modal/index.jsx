@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/auth.jsx";
 import { getNextDay, getNextWeek } from "../../helpr/date.js";
 
+import IconAdd from "../../assets/icons/add.svg";
+import IconClose from "../../assets/icons/close.svg";
+
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();
   const [repeat, setRepeat] = useState(false);
@@ -19,7 +22,7 @@ export default ({ close, update }) => {
   async function send(data) {
     setLoading(true);
     if (!repeat) await saveTask({ ...data, origin: true });
-    else switch(data.repeatMode) {
+    else switch (data.repeatMode) {
       case "daily":
         await saveTasksDaily(data, data.times);
         break;
@@ -68,27 +71,33 @@ export default ({ close, update }) => {
         <form className="form" onSubmit={handleSubmit(send)}>
           <div className="group">
             <label htmlFor="title">Tarefa:</label>
-            <input type="text" className="input" id="title" {...register("title", { required: true })} />
+            <input type="text" className="input" id="title"
+              {...register("title", { required: true })} />
           </div>
 
           <div className="group">
             <label htmlFor="content">Descrição:</label>
-            <input type="text" className="input" id="content" {...register("content", { required: true })} />
+            <input type="text" className="input" id="content"
+              {...register("content", { required: true })} />
           </div>
 
           <div className="group">
             <label htmlFor="date">Dia:</label>
-            <input type="date" className="input" id="date" {...register("date", { required: true })} />
+            <input type="date" className="input" id="date"
+              {...register("date", { required: true })} />
           </div>
 
           <div className="double-column">
             <div className="group">
               <label htmlFor="hourStart">Inicia:</label>
-              <input type="time" className="input" id="hourStart" {...register("hourStart", { required: true })} />
+              <input type="time" className="input" id="hourStart"
+                {...register("hourStart", { required: true })} />
             </div>
+            
             <div className="group">
               <label htmlFor="hourEnd">Encerra:</label>
-              <input type="time" className="input" id="hourEnd" {...register("hourEnd", { required: true })} />
+              <input type="time" className="input" id="hourEnd"
+                {...register("hourEnd", { required: true })} />
             </div>
           </div>
 
@@ -102,25 +111,38 @@ export default ({ close, update }) => {
               <div className="group">
                 <div className="group-inline">
                   <label htmlFor="daily">Diariamente:</label>
-                  <input type="radio" id="daily" defaultValue="daily" {...register("repeatMode", { required: true })} /> <br />
+                  <input type="radio" id="daily" defaultValue="daily"
+                    {...register("repeatMode", { required: true })} /> <br />
                 </div>
+
                 <div className="group-inline">
                   <label htmlFor="weekly">Semanalmente:</label>
-                  <input type="radio" id="weekly" defaultValue="weekly" {...register("repeatMode", { required: true })} />
+                  <input type="radio" id="weekly" defaultValue="weekly"
+                    {...register("repeatMode", { required: true })} />
                 </div>
+
               </div>
               <div className="group">
                 <label htmlFor="times">Quantidade:</label>
-                <input type="number" className="input" id="times" {...register("times", { required: true })} />
+                <input type="number" className="input" id="times"
+                  {...register("times", { required: true })} />
               </div>
             </div>
           )}
 
           <div className="double-column">
-            <button type="submit" className="btn">
-              {loading ? "Carregando..." : "Adicionar"}
+            <button type="submit" className="btn" disabled={loading}>
+              {loading ?
+                "Carregando..." :
+                <>
+                  Adicionar
+                  <img src={IconAdd} />
+                </>}
             </button>
-            <button type="button" className="btn" onClick={() => close()}>Fechar</button>
+            <button type="button" className="btn" onClick={() => close()}>
+              Fechar
+              <img src={IconClose} />
+            </button>
           </div>
         </form>
       </div>
