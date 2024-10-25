@@ -47,29 +47,25 @@ export default ({ day }) => {
             </span>
 
             <div className="day-items">
-                {tasks.map(({ id, done, origin, title, hourStart, hourEnd }, idx) => {
+                {tasks.map(({ id, done, title, hourStart, hourEnd }, idx) => {
                     return (
                         <div className={done ? "task done" : "task"} key={idx}>
                             <div className="task-hours">{hourStart} - {hourEnd}</div>
                             <span className="task-title">{title}</span>
-
-                            {!origin && (
-                                <div className="task-control">
-                                    <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
-                                        <img src={IconDelete} />
+                            <div className="task-control">
+                                <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
+                                    <img src={IconDelete} />
+                                </button>
+                                {done ? (
+                                    <button className="btn-icon" onClick={() => handleOpenTask(id)}>
+                                        <img src={IconRefresh} />
                                     </button>
-
-                                    {done ? (
-                                        <button className="btn-icon" onClick={() => handleOpenTask(id)}>
-                                            <img src={IconRefresh} />
-                                        </button>
-                                    ) : (
-                                        <button className="btn-icon" onClick={() => handleCompleteTask(id)}>
-                                            <img src={IconCheck} />
-                                        </button>
-                                    )}
-                                </div>
-                            )}
+                                ) : (
+                                    <button className="btn-icon" onClick={() => handleCompleteTask(id)}>
+                                        <img src={IconCheck} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     );
                 })}
