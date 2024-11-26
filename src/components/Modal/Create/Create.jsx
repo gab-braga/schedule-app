@@ -22,7 +22,7 @@ export default ({ close, update }) => {
 
   async function send(data) {
     setLoading(true);
-    if (!repeat) await saveTask(data);
+    if (!repeat) await saveTask({...data, origin: true});
     else switch (data.repeatMode) {
       case "daily":
         await saveTasksDaily(data, data.times);
