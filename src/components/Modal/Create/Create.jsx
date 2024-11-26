@@ -1,12 +1,13 @@
-import "./style.css";
-import { getNextDay, getNextWeek } from "../../helpr/date.js";
-import { create } from "../../firebase/firestore.js";
+import { getNextDay, getNextWeek } from "../../../helpr/date.js";
+import { create } from "../../../firebase/firestore.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/auth.jsx";
+import { useAuth } from "../../../context/Auth.jsx";
 
-import IconAdd from "../../assets/icons/add.svg";
-import IconClose from "../../assets/icons/close.svg";
+import IconAdd from "../../../assets/icons/add.svg";
+import IconClose from "../../../assets/icons/close.svg";
+
+import "./Create.css";
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();

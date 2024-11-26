@@ -1,12 +1,13 @@
-import "./style.css";
 import { useEffect, useState } from "react";
 import { checkToday, formatDateToString, formatDayOfWeek } from "../../helpr/date";
 import { deleteTask, findScheduleByUser, updateTask } from "../../service/task";
-import { useAuth } from "../../context/auth";
+import { useAuth } from "../../context/Auth";
 
 import IconDelete from "../../assets/icons/delete.svg";
 import IconCheck from "../../assets/icons/check.svg";
 import IconRefresh from "../../assets/icons/refresh.svg";
+
+import "./Day.css";
 
 export default ({ day }) => {
     const [isToday, setIsToday] = useState(false);

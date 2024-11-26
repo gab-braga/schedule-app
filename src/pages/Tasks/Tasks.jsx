@@ -1,14 +1,15 @@
-import "./style.css";
 import { findTasksByUser } from "../../service/task";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/auth";
+import { useAuth } from "../../context/Auth";
 import { Navigate } from "react-router-dom";
-import Modal from "../../components/modal";
-import Header from "../../components/header";
-import Card from "../../components/card";
+import ModalCreate from "../../components/Modal/Create/Create";
+import Header from "../../components/Header/Header";
+import Card from "../../components/Card/Card";
+
+import "./Tasks.css";
 
 export default () => {
-  const [modal, setModal] = useState(false);
+  const [modalCreate, setModalCreate] = useState(false);
   const [tasks, setTasks] = useState([]);
   const { isAuthenticated, user } = useAuth();
 
@@ -17,12 +18,12 @@ export default () => {
     setTasks(data);
   }
 
-  function openModal() {
-    setModal(true);
+  function openModalCreate() {
+    setModalCreate(true);
   }
 
-  function closeModal() {
-    setModal(false);
+  function closeModalCreate() {
+    setModalCreate(false);
   }
 
   function updateData() {
@@ -37,9 +38,9 @@ export default () => {
 
   return (
     <div className="tasks">
-      {modal && <Modal close={closeModal} update={updateData} />}
+      {modalCreate && <ModalCreate close={closeModalCreate} update={updateData} />}
 
-      <Header action={openModal} />
+      <Header action={openModalCreate} />
 
       <div className="tasks-panel">
         <div className="container tasks-grid">

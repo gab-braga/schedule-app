@@ -1,10 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignIn from "./pages/signin";
-import SignUp from "./pages/signup";
-import Tasks from "./pages/tasks";
-import Schedule from "./pages/schedule";
-import Redirect from "./pages/redirect";
-import Root from "./pages/root";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import SignIn from "./pages/Signin/Signin";
+import SignUp from "./pages/Signup/Signup";
+import Tasks from "./pages/Tasks/Tasks";
+import Schedule from "./pages/Schedule/Schedule";
+import Root from "./pages/Root/Root";
 
 function App() {
   return (
@@ -16,7 +15,7 @@ function App() {
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
-        <Route path="*" element={<Redirect />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

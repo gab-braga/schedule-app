@@ -1,27 +1,28 @@
-import "./style.css";
 import { getCurrentWeekDays } from "../../helpr/date";
-import { useAuth } from "../../context/auth";
+import { useAuth } from "../../context/Auth";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Modal from "../../components/modal";
-import Header from "../../components/header";
-import Day from "../../components/day";
+import ModalCreate from "../../components/Modal/Create/Create";
+import Header from "../../components/Header/Header";
+import Day from "../../components/Day/Day";
 
 import IconArrowBack from "../../assets/icons/arrow_back.svg";
 import IconArrowForward from "../../assets/icons/arrow_forward.svg";
 
+import "./Schedule.css";
+
 export default () => {
     const [weekNumber, setWeekNumber] = useState(0);
     const [week, setWeek] = useState([]);
-    const [modal, setModal] = useState(false);
+    const [modalCreate, setModalCreate] = useState(false);
     const { isAuthenticated } = useAuth();
 
-    function openModal() {
-      setModal(true);
+    function openModalCreate() {
+      setModalCreate(true);
     }
   
-    function closeModal() {
-      setModal(false);
+    function closeModalCreate() {
+      setModalCreate(false);
     }
 
     function updateWeek() {
@@ -44,9 +45,9 @@ export default () => {
 
     return (
         <div className="schedule">
-            {modal && <Modal close={closeModal} update={updateWeek} />}
+            {modalCreate && <ModalCreate close={closeModalCreate} update={updateWeek} />}
 
-            <Header action={openModal} />
+            <Header action={openModalCreate} />
 
             <div className="schedule-panel">
                 <div className="schedule-control">

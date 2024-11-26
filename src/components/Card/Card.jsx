@@ -1,9 +1,10 @@
-import "./style.css";
 import { deleteTask, updateTask } from "../../service/task";
 import { formatLocalDate } from "../../helpr/date";
 
 import IconDelete from "../../assets/icons/delete.svg";
 import IconCheck from "../../assets/icons/check.svg";
+
+import "./Card.css";
 
 export default ({ id, title, content, date, done, update }) => {
   async function handleDeleteTask() {

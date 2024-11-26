@@ -1,19 +1,20 @@
-import "./style.css";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../context/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/Auth";
+
+import "./Signin.css";
 
 export default () => {
   const { handleSubmit, register } = useForm();
   const navigate = useNavigate();
+  const { login, loginWithGoogle } = useAuth();
   const [message, setMessage] = useState(null);
-  const { registerUser, loginWithGoogle } = useAuth();
 
-  async function handleSignUp({ email, password }) {
+  async function handleSignIn({ email, password }) {
     setMessage("Carregando...");
     try {
-      await registerUser(email, password);
+      await login(email, password);
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -26,16 +27,16 @@ export default () => {
     try {
       await loginWithGoogle();
       navigate("/");
-    } catch (error) {
+    } catch(error) {
       console.error(error);
       setMessage("Erro. Tente novamente.")
     }
   }
 
   return (
-    <div className="signup">
-      <form onSubmit={handleSubmit(handleSignUp)} className="form">
-        <h2>{message ? message : "Cadastre-se"}</h2>
+    <div className="login">
+      <form onSubmit={handleSubmit(handleSignIn)} className="form">
+        <h2>{message ? message : "Login"}</h2>
         <button type="button" className="button" onClick={handleSignInGoogle}>Entrar com Google</button>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
@@ -45,8 +46,8 @@ export default () => {
           <label htmlFor="password">Senha</label>
           <input type="password" className="input" {...register("password", { required: true })} />
         </div>
-        <button type="submit" className="button">Cadastrar</button>
-        <Link to="/signin" className="link">Login</Link>
+        <button type="submit" className="button">Entrar</button>
+        <Link to="/signup" className="link">Cadastre-se</Link>
       </form>
     </div>
   );

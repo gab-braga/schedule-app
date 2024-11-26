@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { AuthProvider } from "../../context/auth";
-import "./style.css";
+import { AuthProvider } from "../../context/Auth";
+import "./Root.css";
 
 export default () => {
     return (

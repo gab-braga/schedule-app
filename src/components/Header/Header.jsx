@@ -1,9 +1,10 @@
-import "./style.css";
-import { useAuth } from "../../context/auth";
+import { useAuth } from "../../context/Auth";
 import { NavLink } from "react-router-dom";
 
-import IconAdd from "../..//assets/icons/add.svg";
-import IconLogout from "../..//assets/icons/logout.svg";
+import IconAdd from "../../assets/icons/add.svg";
+import IconLogout from "../../assets/icons/logout.svg";
+
+import "./Header.css";
 
 export default ({ action }) => {
   const { logout } = useAuth();
