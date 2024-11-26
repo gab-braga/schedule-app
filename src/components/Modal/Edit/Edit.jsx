@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { findTask, updateTask } from "../../../service/task";
 
-import IconAdd from "../../../assets/icons/add.svg";
+import IconEdit from "../../../assets/icons/edit.svg";
 import IconClose from "../../../assets/icons/close.svg";
 
 import "../Modal.css";
@@ -72,7 +72,7 @@ export default ({ taskId, close, update }) => {
                 "Carregando..." :
                 <>
                   Editar
-                  <img src={IconAdd} className="icon" />
+                  <img src={IconEdit} className="icon" />
                 </>}
             </button>
 

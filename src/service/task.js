@@ -4,7 +4,8 @@ import {
     deleteById,
     updateById,
     deleteByFilters,
-    updateByFilters
+    updateByFilters,
+    create
 } from "../firebase/firestore";
 
 async function findTask(id) {
@@ -31,6 +32,18 @@ async function findScheduleByUser(userId, date) {
 
 async function deleteTask(id) {
     await deleteById("tasks", id);
+}
+
+async function duplicateTask(id) {
+    const task = await find("tasks", id);
+    const duplicated = {...task, done: false, isUpdated: false};
+    delete duplicated.id;
+    if (task.origin) {
+        delete duplicated.origin;
+        duplicated.originId = task.id;
+    }
+    else duplicated.originId = task.originId;
+    await create("tasks", duplicated);
 }
 
 async function updateTask(id, data) {
@@ -60,5 +73,6 @@ export {
     deleteTask,
     updateTask,
     deleteAllTasks,
+    duplicateTask,
     updateAllTasks
 };

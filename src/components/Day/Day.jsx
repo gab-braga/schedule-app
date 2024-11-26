@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { checkToday, formatDateToString, formatDayOfWeek } from "../../helpr/date";
-import { deleteTask, findScheduleByUser, updateTask } from "../../service/task";
+import { deleteTask, duplicateTask, updateTask, findScheduleByUser } from "../../service/task";
 import { useAuth } from "../../context/Auth";
 import ModalEdit from "../../components/Modal/Edit/Edit";
 
@@ -8,6 +8,7 @@ import IconDelete from "../../assets/icons/delete.svg";
 import IconCheck from "../../assets/icons/check.svg";
 import IconRefresh from "../../assets/icons/refresh.svg";
 import IconEdit from "../../assets/icons/edit.svg";
+import IconCopy from "../../assets/icons/copy.svg";
 
 import "./Day.css";
 
@@ -22,25 +23,31 @@ export default ({ day }) => {
         setTasks(data);
     }
 
-    const handlDeleteTask = async (id) => {
+    async function handleDeleteTask(id) {
         const confirm = window.confirm("Deseja excluir?");
         if (confirm) {
-            deleteTask(id);
+            await deleteTask(id);
             loadData();
         }
     }
 
-    const handleCompleteTask = async (id) => {
-        updateTask(id, { done: true });
+    async function handleCompleteTask(id) {
+        await updateTask(id, { done: true });
         loadData();
     }
 
-    const handleOpenTask = async (id) => {
-        updateTask(id, { done: false });
+    async function handleOpenTask(id) {
+        await updateTask(id, { done: false });
         loadData();
     }
 
-    const handleUpdateTask = async (id) => {
+    async function handleDuplicateTask(id) {
+        window.alert(id)
+        await duplicateTask(id);
+        loadData();
+    }
+
+    async function handleUpdateTask() {
         loadData();
     }
 
@@ -60,9 +67,10 @@ export default ({ day }) => {
                 {tasks.map(task => (
                     <TaskItem key={task.id} {...{
                         ...task,
-                        handlDeleteTask,
+                        handleDeleteTask,
                         handleCompleteTask,
                         handleOpenTask,
+                        handleDuplicateTask,
                         handleUpdateTask
                     }} />
                 ))}
@@ -74,9 +82,10 @@ export default ({ day }) => {
 function TaskItem({
     id, title, done,
     hourStart, hourEnd,
-    handlDeleteTask,
+    handleDeleteTask,
     handleOpenTask,
     handleCompleteTask,
+    handleDuplicateTask,
     handleUpdateTask
 }) {
     const [modalEdit, setModalEdit] = useState(false);
@@ -97,7 +106,7 @@ function TaskItem({
             <div className="task-hours">{hourStart} - {hourEnd}</div>
             <span className="task-title">{title}</span>
             <div className="task-control">
-                <button className="btn-icon" onClick={() => handlDeleteTask(id)}>
+                <button className="btn-icon" onClick={() => handleDeleteTask(id)}>
                     <img src={IconDelete} />
                 </button>
                 {done ? (
@@ -109,6 +118,9 @@ function TaskItem({
                         <img src={IconCheck} />
                     </button>
                 )}
+                <button className="btn-icon" onClick={() => handleDuplicateTask(id)}>
+                    <img src={IconCopy} />
+                </button>
                 <button className="btn-icon" onClick={() => openModalEdit()}>
                     <img src={IconEdit} />
                 </button>
