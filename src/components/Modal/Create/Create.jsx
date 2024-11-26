@@ -7,7 +7,7 @@ import { useAuth } from "../../../context/Auth.jsx";
 import IconAdd from "../../../assets/icons/add.svg";
 import IconClose from "../../../assets/icons/close.svg";
 
-import "./Create.css";
+import "../Modal.css";
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();

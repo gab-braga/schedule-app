@@ -1,74 +1,40 @@
-import { getNextDay, getNextWeek } from "../../../helpr/date.js";
-import { create } from "../../../firebase/firestore.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../../context/Auth.jsx";
+import { findTask, updateTask } from "../../../service/task";
 
 import IconAdd from "../../../assets/icons/add.svg";
 import IconClose from "../../../assets/icons/close.svg";
 
-import "./Edit.css";
+import "../Modal.css";
 
-export default ({ close, update }) => {
-  const { handleSubmit, register } = useForm();
-  const [repeat, setRepeat] = useState(false);
+export default ({ taskId, close, update }) => {
+  const { handleSubmit, register, reset } = useForm();
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
-
-  function handleRepeat({ target }) {
-    const { checked } = target;
-    setRepeat(checked);
-  }
+  const [taskEdit, setTaskEdit] = useState({});
 
   async function send(data) {
     setLoading(true);
-    if (!repeat) await saveTask({ ...data, origin: true });
-    else switch (data.repeatMode) {
-      case "daily":
-        await saveTasksDaily(data, data.times);
-        break;
-      case "weekly":
-        await saveTasksWeekly(data, data.times);
-        break;
-    }
+    updateTask(taskId, data);
     setLoading(false);
     update();
     close();
   }
 
-  async function saveTasksDaily(data, times) {
-    const { id } = await saveTask({ ...data, origin: true });
-    for (let count = 1; count < times; count++) {
-      const date = getNextDay(data.date, count);
-      await saveTask({ ...data, date, originId: id });
-    }
+  async function loadTask() {
+    const task = await findTask(taskId);
+    setTaskEdit(task);
+    const { title, content, date, hourStart, hourEnd } = task;
+    reset({ title, content, date, hourStart, hourEnd });
   }
 
-  async function saveTasksWeekly(data, times) {
-    const { id } = await saveTask({ ...data, origin: true });
-    for (let count = 1; count < times; count++) {
-      const date = getNextWeek(data.date, count);
-      await saveTask({ ...data, date, originId: id });
-    }
-  }
-
-  async function saveTask(data) {
-    const { title, content, date, hourStart, hourEnd } = data;
-    const taskData = {
-      userId: user.uid,
-      inserted: new Date(Date.now()),
-      done: false,
-      title, content, date, hourStart, hourEnd
-    };
-    if ('origin' in data) taskData.origin = data.origin;
-    if ('originId' in data) taskData.originId = data.originId;
-    return await create("tasks", taskData);
-  }
+  useEffect(() => {
+    loadTask();
+  }, [taskId]);
 
   return (
     <div className="bg-modal">
       <div className="modal">
-        <h2>Nova Tarefa</h2>
+        <h2>Editar Tarefa</h2>
         <form className="form" onSubmit={handleSubmit(send)}>
           <div className="group">
             <label htmlFor="title">Tarefa:</label>
@@ -102,41 +68,12 @@ export default ({ close, update }) => {
             </div>
           </div>
 
-          <div className="group-inline">
-            <label htmlFor="repet">Repetir:</label>
-            <input type="checkbox" id="repet" onChange={handleRepeat} />
-          </div>
-
-          {repeat && (
-            <div className="double-column">
-              <div className="group">
-                <div className="group-inline">
-                  <label htmlFor="daily">Diariamente:</label>
-                  <input type="radio" id="daily" defaultValue="daily"
-                    {...register("repeatMode", { required: true })} /> <br />
-                </div>
-
-                <div className="group-inline">
-                  <label htmlFor="weekly">Semanalmente:</label>
-                  <input type="radio" id="weekly" defaultValue="weekly"
-                    {...register("repeatMode", { required: true })} />
-                </div>
-
-              </div>
-              <div className="group">
-                <label htmlFor="times">Quantidade:</label>
-                <input type="number" className="input" id="times"
-                  {...register("times", { required: true })} />
-              </div>
-            </div>
-          )}
-
           <div className="double-column">
             <button type="submit" className="button" disabled={loading}>
               {loading ?
                 "Carregando..." :
                 <>
-                  Adicionar
+                  Editar
                   <img src={IconAdd} className="icon" />
                 </>}
             </button>

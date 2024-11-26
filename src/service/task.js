@@ -1,10 +1,15 @@
 import {
     deleteByFilters,
     deleteById,
+    find,
     findByConditions,
     updateByFilters,
     updateById
 } from "../firebase/firestore";
+
+async function findTask(id) {
+    return await find("tasks", id);
+}
 
 async function findTasksByUser(userId) {
     const filters = [
@@ -25,18 +30,15 @@ async function findScheduleByUser(userId, date) {
 }
 
 async function deleteTask(id) {
-    const filters = [{ field: "originId", op: "==", value: id }];
     await deleteById("tasks", id);
-    await deleteByFilters("tasks", filters);
 }
 
 async function updateTask(id, data) {
-    const filters = [{ field: "originId", op: "==", value: id }];
     await updateById("tasks", id, data);
-    await updateByFilters("tasks", filters, data);
 }
 
 export {
+    findTask,
     findTasksByUser,
     findScheduleByUser,
     deleteTask,

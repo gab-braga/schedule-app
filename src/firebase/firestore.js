@@ -10,6 +10,7 @@ import {
   query,
   updateDoc,
   writeBatch,
+  getDoc,
 } from "firebase/firestore";
 import app from "./config";
 
@@ -46,30 +47,56 @@ async function createAll(local, data) {
 }
 
 
+async function find(local, id) {
+  try {
+    const docRef = doc(db, local, id);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      throw new Error(`Documento não encontrado na coleção ${local}.`);
+    }
+
+    return {
+      id: docSnap.id,
+      ...docSnap.data(),
+    };
+  } catch (err) {
+    console.error(err);
+    throw new Error(`Erro ao buscar documento: ${err.message}`);
+  }
+}
+
+
+
 async function findByConditions(local, filters, order) {
   const docs = [];
 
-  const constraints = [
-    ...filters.map(
-      ({ field, op, value }) => { return where(field, op, value) }
-    ),
-    orderBy(order.field, order.sort)
-  ];
+  try {
+    const constraints = [
+      ...filters.map(
+        ({ field, op, value }) => { return where(field, op, value) }
+      ),
+      orderBy(order.field, order.sort)
+    ];
 
-  const querySnapshot = await getDocs(
-    query(
-      collection(db, local),
-      ...constraints,
-    ),
-  );
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, local),
+        ...constraints,
+      ),
+    );
 
-  querySnapshot.forEach(doc => {
-    const data = {
-      id: doc.id,
-      ...doc.data(),
-    };
-    docs.push(data);
-  });
+    querySnapshot.forEach(doc => {
+      const data = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      docs.push(data);
+    });
+  } catch (err) {
+    console.error(err);
+    throw new Error(`Erro ao buscar documento: ${err.message}`);
+  }
 
   return docs;
 }
@@ -115,6 +142,7 @@ async function updateByFilters(local, filters, data) {
 export {
   create,
   createAll,
+  find,
   findByConditions,
   deleteById,
   updateById,
