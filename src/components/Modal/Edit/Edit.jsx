@@ -1,5 +1,5 @@
 import { getNextDay, getNextWeek } from "../../../helpr/date.js";
-import { create, createAll } from "../../../firebase/firestore.js";
+import { create } from "../../../firebase/firestore.js";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../../context/Auth.jsx";
@@ -7,7 +7,7 @@ import { useAuth } from "../../../context/Auth.jsx";
 import IconAdd from "../../../assets/icons/add.svg";
 import IconClose from "../../../assets/icons/close.svg";
 
-import "./Create.css";
+import "./Edit.css";
 
 export default ({ close, update }) => {
   const { handleSubmit, register } = useForm();
@@ -22,7 +22,7 @@ export default ({ close, update }) => {
 
   async function send(data) {
     setLoading(true);
-    if (!repeat) await saveTask(data);
+    if (!repeat) await saveTask({ ...data, origin: true });
     else switch (data.repeatMode) {
       case "daily":
         await saveTasksDaily(data, data.times);
@@ -37,50 +37,32 @@ export default ({ close, update }) => {
   }
 
   async function saveTasksDaily(data, times) {
-    const { id } = await saveTask({...data, origin: true});
-    const tasks = [];
+    const { id } = await saveTask({ ...data, origin: true });
     for (let count = 1; count < times; count++) {
       const date = getNextDay(data.date, count);
-      tasks.push({ ...data, date, originId: id });
+      await saveTask({ ...data, date, originId: id });
     }
-    await saveAllTasks(tasks);
   }
 
   async function saveTasksWeekly(data, times) {
-    const { id } = await saveTask({...data, origin: true});
-    const tasks = [];
+    const { id } = await saveTask({ ...data, origin: true });
     for (let count = 1; count < times; count++) {
       const date = getNextWeek(data.date, count);
-      tasks.push({ ...data, date, originId: id });
+      await saveTask({ ...data, date, originId: id });
     }
-    await saveAllTasks(tasks);
   }
 
   async function saveTask(data) {
-    const task = prepareTask(data);
-    return await create("tasks", task);
-  }
-
-  async function saveAllTasks(data) {
-    const tasks = [];
-    if (Array.isArray(data))
-      for (const item of data) {
-        tasks.push(prepareTask(item));
-      }
-    return await createAll("tasks", tasks);
-  }
-
-  function prepareTask(data) {
     const { title, content, date, hourStart, hourEnd } = data;
-    const task = {
+    const taskData = {
       userId: user.uid,
       inserted: new Date(Date.now()),
       done: false,
       title, content, date, hourStart, hourEnd
     };
-    if ('origin' in data) task.origin = data.origin;
-    if ('originId' in data) task.originId = data.originId;
-    return task;
+    if ('origin' in data) taskData.origin = data.origin;
+    if ('originId' in data) taskData.originId = data.originId;
+    return await create("tasks", taskData);
   }
 
   return (

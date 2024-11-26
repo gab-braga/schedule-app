@@ -9,6 +9,7 @@ import {
   orderBy,
   query,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import app from "./config";
 
@@ -22,6 +23,28 @@ async function create(local, data) {
     throw new Error(`Algo de errado em salvar na coleção ${local}.`);
   }
 }
+
+async function createAll(local, data) {
+  try {
+    if (!Array.isArray(data)) {
+      throw new Error('Os dados precisam ser uma lista de objetos.');
+    }
+
+    const batch = writeBatch(db);
+    const collectionRef = collection(db, local);
+
+    data.forEach(item => {
+      const docRef = doc(collectionRef);
+      batch.set(docRef, item);
+    });
+
+    return batch.commit();
+  } catch (err) {
+    console.error(err);
+    throw new Error(`Algo deu errado ao salvar na coleção ${local}.`);
+  }
+}
+
 
 async function findByConditions(local, filters, order) {
   const docs = [];
@@ -91,6 +114,7 @@ async function updateByFilters(local, filters, data) {
 
 export {
   create,
+  createAll,
   findByConditions,
   deleteById,
   updateById,
