@@ -13,7 +13,7 @@ export default ({ taskId, close, update }) => {
 
   async function send(data) {
     setLoading(true);
-    updateTask(taskId, data);
+    updateTask(taskId, { ...data, isUpdated: true });
     setLoading(false);
     update();
     close();

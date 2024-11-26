@@ -68,16 +68,11 @@ async function find(local, id) {
 
 
 
-async function findByConditions(local, filters, order) {
-  const docs = [];
+async function findByFilters(local, filters, order) {
+  const results = [];
 
   try {
-    const constraints = [
-      ...filters.map(
-        ({ field, op, value }) => { return where(field, op, value) }
-      ),
-      orderBy(order.field, order.sort)
-    ];
+    const constraints = prepareConstraints(filters, order);
 
     const querySnapshot = await getDocs(
       query(
@@ -86,19 +81,19 @@ async function findByConditions(local, filters, order) {
       ),
     );
 
-    querySnapshot.forEach(doc => {
+    querySnapshot.forEach(docSnap => {
       const data = {
-        id: doc.id,
-        ...doc.data(),
+        id: docSnap.id,
+        ...docSnap.data(),
       };
-      docs.push(data);
+      results.push(data);
     });
   } catch (err) {
     console.error(err);
     throw new Error(`Erro ao buscar documento: ${err.message}`);
   }
 
-  return docs;
+  return results;
 }
 
 async function deleteById(local, id) {
@@ -112,9 +107,7 @@ async function updateById(local, id, data) {
 }
 
 async function deleteByFilters(local, filters) {
-  const constraints = [
-    ...filters.map(({ field, op, value }) => where(field, op, value))
-  ];
+  const constraints = prepareConstraints(filters);
   const querySnapshot = await getDocs(
     query(
       collection(db, local),
@@ -126,9 +119,7 @@ async function deleteByFilters(local, filters) {
 }
 
 async function updateByFilters(local, filters, data) {
-  const constraints = [
-    ...filters.map(({ field, op, value }) => where(field, op, value))
-  ];
+  const constraints = prepareConstraints(filters);
   const querySnapshot = await getDocs(
     query(
       collection(db, local),
@@ -139,11 +130,28 @@ async function updateByFilters(local, filters, data) {
   return await Promise.all(updatePromises);
 }
 
+function prepareConstraints(filters, order) {
+  if (!Array.isArray(filters)) {
+    throw new Error("Formato inválido dos filtros.");
+  }
+
+  const constraints = [
+    ...filters.map(({ field, op, value }) => where(field, op, value)),
+  ];
+
+  if (order) {
+    const { field, sort } = order;
+    constraints.push(orderBy(field, sort));
+  }
+
+  return constraints;
+}
+
 export {
   create,
   createAll,
   find,
-  findByConditions,
+  findByFilters,
   deleteById,
   updateById,
   deleteByFilters,

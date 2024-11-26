@@ -76,7 +76,9 @@ export default ({ close, update }) => {
       userId: user.uid,
       inserted: new Date(Date.now()),
       done: false,
-      title, content, date, hourStart, hourEnd
+      isUpdated: false,
+      title, content, date,
+      hourStart, hourEnd
     };
     if ('origin' in data) task.origin = data.origin;
     if ('originId' in data) task.originId = data.originId;

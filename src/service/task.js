@@ -1,10 +1,10 @@
 import {
-    deleteByFilters,
-    deleteById,
     find,
-    findByConditions,
-    updateByFilters,
-    updateById
+    findByFilters,
+    deleteById,
+    updateById,
+    deleteByFilters,
+    updateByFilters
 } from "../firebase/firestore";
 
 async function findTask(id) {
@@ -17,7 +17,7 @@ async function findTasksByUser(userId) {
         { field: "origin", op: "==", value: true }
     ];
     const order = { field: "inserted", sort: "desc" }
-    return await findByConditions("tasks", filters, order);
+    return await findByFilters("tasks", filters, order);
 }
 
 async function findScheduleByUser(userId, date) {
@@ -26,7 +26,7 @@ async function findScheduleByUser(userId, date) {
         { field: "date", op: "==", value: date }
     ];
     const order = { field: "hourStart", sort: "asc" }
-    return await findByConditions("tasks", filters, order);
+    return await findByFilters("tasks", filters, order);
 }
 
 async function deleteTask(id) {
@@ -37,10 +37,28 @@ async function updateTask(id, data) {
     await updateById("tasks", id, data);
 }
 
+async function deleteAllTasks(id) {
+    const filters = [
+        { field: "originId", op: "==", value: id },
+        { field: "isUpdated", op: "==", value: false }
+    ];
+    await deleteByFilters("tasks", filters);
+}
+
+async function updateAllTasks(id, data) {
+    const filters = [
+        { field: "originId", op: "==", value: id },
+        { field: "isUpdated", op: "==", value: false }
+    ];
+    await updateByFilters("tasks", filters, data);
+}
+
 export {
     findTask,
     findTasksByUser,
     findScheduleByUser,
     deleteTask,
-    updateTask
+    updateTask,
+    deleteAllTasks,
+    updateAllTasks
 };

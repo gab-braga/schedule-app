@@ -23,8 +23,11 @@ export default ({ day }) => {
     }
 
     const handlDeleteTask = async (id) => {
-        deleteTask(id);
-        loadData();
+        const confirm = window.confirm("Deseja excluir?");
+        if (confirm) {
+            deleteTask(id);
+            loadData();
+        }
     }
 
     const handleCompleteTask = async (id) => {
