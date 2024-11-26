@@ -27,28 +27,27 @@ export default ({ day }) => {
         const confirm = window.confirm("Deseja excluir?");
         if (confirm) {
             await deleteTask(id);
-            loadData();
+            await loadData();
         }
     }
 
     async function handleCompleteTask(id) {
         await updateTask(id, { done: true });
-        loadData();
+        await loadData();
     }
 
     async function handleOpenTask(id) {
         await updateTask(id, { done: false });
-        loadData();
+        await loadData();
     }
 
     async function handleDuplicateTask(id) {
-        window.alert(id)
         await duplicateTask(id);
-        loadData();
+        await loadData();
     }
 
     async function handleUpdateTask() {
-        loadData();
+        await loadData();
     }
 
     useEffect(() => {

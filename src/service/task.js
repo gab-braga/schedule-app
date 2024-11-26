@@ -38,11 +38,13 @@ async function duplicateTask(id) {
     const task = await find("tasks", id);
     const duplicated = {...task, done: false, isUpdated: false};
     delete duplicated.id;
+
     if (task.origin) {
         delete duplicated.origin;
         duplicated.originId = task.id;
     }
     else duplicated.originId = task.originId;
+    
     await create("tasks", duplicated);
 }
 
