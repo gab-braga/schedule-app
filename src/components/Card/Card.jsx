@@ -31,10 +31,10 @@ export default ({ id, title, content, date, update, hourStart, hourEnd }) => {
     if (hourEndEdit == null) return;
 
     const data = {
-      title: titleEdit,
-      content: contentEdit,
-      hourStart: hourStartEdit,
-      hourEnd: hourEndEdit
+      title: titleEdit || title,
+      content: contentEdit || content,
+      hourStart: hourStartEdit || hourStart,
+      hourEnd: hourEndEdit || hourEnd
     };
 
     await updateTask(id, data);
