@@ -10,7 +10,6 @@ import "../Modal.css";
 export default ({ taskId, close, update }) => {
   const { handleSubmit, register, reset } = useForm();
   const [loading, setLoading] = useState(false);
-  const [taskEdit, setTaskEdit] = useState({});
 
   async function send(data) {
     setLoading(true);
@@ -20,15 +19,14 @@ export default ({ taskId, close, update }) => {
     close();
   }
 
-  async function loadTask() {
+  async function loadData() {
     const task = await findTask(taskId);
-    setTaskEdit(task);
     const { title, content, date, hourStart, hourEnd } = task;
     reset({ title, content, date, hourStart, hourEnd });
   }
 
   useEffect(() => {
-    loadTask();
+    loadData();
   }, [taskId]);
 
   return (
